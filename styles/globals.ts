@@ -1,3 +1,6 @@
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
 * {
   padding: 0;
   margin: 0;
@@ -17,3 +20,6 @@ body {
   justify-content: center;
   align-items: center;
 }
+`;
+
+export default GlobalStyle;
