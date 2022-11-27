@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import Title from "../components/Title";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -12,8 +13,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>Welcome to Next.js!</h1>
-        <h2>Locale: {router.locale}</h2>
+        <Title>Welcome to Next.js!</Title>
+        <p>Locale: {router.locale}</p>
       </main>
     </div>
   );
