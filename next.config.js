@@ -5,6 +5,9 @@ const nextConfig = {
     locales: ["ru", "en"],
     defaultLocale: "ru",
   },
+  compiler: {
+    styledComponents: true,
+  },
 };
 
 module.exports = nextConfig;
