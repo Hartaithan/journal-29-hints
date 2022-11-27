@@ -1,6 +1,9 @@
 import Head from "next/head";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
 
-const Home = () => {
+const Home: NextPage = () => {
+  const router = useRouter();
   return (
     <div>
       <Head>
@@ -10,6 +13,7 @@ const Home = () => {
       </Head>
       <main>
         <h1>Welcome to Next.js!</h1>
+        <h2>Locale: {router.locale}</h2>
       </main>
     </div>
   );
