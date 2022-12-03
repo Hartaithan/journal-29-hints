@@ -1,5 +1,5 @@
 interface IPayloadObject {
-  [key: string]: unknown;
+  [key: string]: any;
 }
 
 export const validatePayload = (payload: IPayloadObject) => {
