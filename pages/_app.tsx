@@ -6,7 +6,8 @@ const lora = Lora({
   subsets: ["latin", "cyrillic"],
 });
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App: React.FC<AppProps> = (props) => {
+  const { Component, pageProps } = props;
   return (
     <main className={lora.className}>
       <GlobalStyle />
