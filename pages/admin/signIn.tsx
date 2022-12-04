@@ -1,11 +1,29 @@
-import { NextPage } from "next";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 import { supabase } from "../../helpers/supabase";
 
-const AdminLoginPage: NextPage = () => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const supabase = createServerSupabaseClient(ctx);
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (session)
+    return {
+      redirect: {
+        destination: "/admin",
+        permanent: false,
+      },
+    };
+
+  return { props: {} };
+};
+
+const AdminSignInPage: NextPage = () => {
   const router = useRouter();
   const [form, setForm] = useState({
     email: "",
@@ -26,14 +44,17 @@ const AdminLoginPage: NextPage = () => {
     <Form onSubmit={handleSubmit}>
       <Input
         id="email"
-        label="Email"
+        label="Пароль"
         type="email"
+        placeholder="Введите почту"
         value={form.email}
         onChange={(event) => setForm({ ...form, email: event.target.value })}
       />
       <Input
         id="password"
+        label="Пароль"
         type="password"
+        placeholder="Введите пароль"
         value={form.password}
         onChange={(event) => setForm({ ...form, password: event.target.value })}
       />
@@ -42,4 +63,4 @@ const AdminLoginPage: NextPage = () => {
   );
 };
 
-export default AdminLoginPage;
+export default AdminSignInPage;
