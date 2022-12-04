@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { validatePayload } from "../../../helpers/payload";
-import { supabase } from "../../../helpers/supabaseClient";
+import { supabase } from "../../../helpers/supabase";
 import { ILanguagePayload } from "../../../models/LanguageModel";
 
 const getAllLanguages = async (req: NextApiRequest, res: NextApiResponse) => {
