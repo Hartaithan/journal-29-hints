@@ -1,5 +1,7 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps } from "next";
+import AdminLayout from "../../layouts/AdminLayout";
+import { NextPageWithLayout } from "../../models/AppModel";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const supabase = createServerSupabaseClient(ctx);
@@ -23,8 +25,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   };
 };
 
-const AdminPage: NextPage = () => {
+const AdminPage: NextPageWithLayout = () => {
   return <p>/admin</p>;
 };
+
+AdminPage.Layout = AdminLayout;
 
 export default AdminPage;

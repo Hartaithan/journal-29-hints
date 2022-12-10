@@ -1,10 +1,12 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 import { supabase } from "../../helpers/supabase";
+import AdminLayout from "../../layouts/AdminLayout";
+import { NextPageWithLayout } from "../../models/AppModel";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const supabase = createServerSupabaseClient(ctx);
@@ -23,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return { props: {} };
 };
 
-const AdminSignInPage: NextPage = () => {
+const AdminSignInPage: NextPageWithLayout = () => {
   const router = useRouter();
   const [form, setForm] = useState({
     email: "",
@@ -62,5 +64,7 @@ const AdminSignInPage: NextPage = () => {
     </Form>
   );
 };
+
+AdminSignInPage.Layout = AdminLayout;
 
 export default AdminSignInPage;
