@@ -2,6 +2,7 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Flex from "../../components/Flex";
 import Form from "../../components/Form";
 import Input from "../../components/Input";
 import { supabase } from "../../helpers/supabase";
@@ -43,25 +44,29 @@ const AdminSignInPage: NextPageWithLayout = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Input
-        id="email"
-        label="Пароль"
-        type="email"
-        placeholder="Введите почту"
-        value={form.email}
-        onChange={(event) => setForm({ ...form, email: event.target.value })}
-      />
-      <Input
-        id="password"
-        label="Пароль"
-        type="password"
-        placeholder="Введите пароль"
-        value={form.password}
-        onChange={(event) => setForm({ ...form, password: event.target.value })}
-      />
-      <Input type="submit" />
-    </Form>
+    <Flex direction="column" justify="center" align="center">
+      <Form onSubmit={handleSubmit}>
+        <Input
+          id="email"
+          label="Пароль"
+          type="email"
+          placeholder="Введите почту"
+          value={form.email}
+          onChange={(event) => setForm({ ...form, email: event.target.value })}
+        />
+        <Input
+          id="password"
+          label="Пароль"
+          type="password"
+          placeholder="Введите пароль"
+          value={form.password}
+          onChange={(event) =>
+            setForm({ ...form, password: event.target.value })
+          }
+        />
+        <Input type="submit" />
+      </Form>
+    </Flex>
   );
 };
 

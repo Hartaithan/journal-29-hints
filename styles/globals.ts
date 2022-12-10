@@ -11,16 +11,21 @@ const GlobalStyle = createGlobalStyle`
 }
 
 html,
-body {
+body,
+#__next {
   height: 100%;
   width: 100%;
   background: black;
 }
 
-body {
+#__next {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 1 auto;
+  overflow: auto;
 }
 `;
 

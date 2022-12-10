@@ -20,12 +20,12 @@ const App: React.FC<IAppProps<IPageProps>> = (props) => {
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-      <main className={lora.className}>
-        <GlobalStyle />
-        <Layout>
+      <Layout>
+        <main className={lora.className}>
           <Component {...pageProps} />
-        </Layout>
-      </main>
+        </main>
+      </Layout>
+      <GlobalStyle />
     </SessionContextProvider>
   );
 };

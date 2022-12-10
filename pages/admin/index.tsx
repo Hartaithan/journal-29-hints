@@ -1,5 +1,6 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSideProps } from "next";
+import Flex from "../../components/Flex";
 import AdminLayout from "../../layouts/AdminLayout";
 import { NextPageWithLayout } from "../../models/AppModel";
 
@@ -26,7 +27,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 const AdminPage: NextPageWithLayout = () => {
-  return <p>/admin</p>;
+  return (
+    <Flex direction="column" justify="center" align="center">
+      /admin
+    </Flex>
+  );
 };
 
 AdminPage.Layout = AdminLayout;
