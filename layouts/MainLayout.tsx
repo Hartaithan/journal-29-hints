@@ -5,7 +5,7 @@ const MainLayout: FC<PropsWithChildren> = (props) => {
   return (
     <>
       <header>MainLayout Header</header>
-      {children}
+      <main>{children}</main>
     </>
   );
 };

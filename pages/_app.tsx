@@ -21,11 +21,14 @@ const App: React.FC<IAppProps<IPageProps>> = (props) => {
       initialSession={pageProps.initialSession}
     >
       <Layout>
-        <main className={lora.className}>
-          <Component {...pageProps} />
-        </main>
+        <Component {...pageProps} />
       </Layout>
       <GlobalStyle />
+      <style jsx global>{`
+        * {
+          font-family: ${lora.style.fontFamily};
+        }
+      `}</style>
     </SessionContextProvider>
   );
 };

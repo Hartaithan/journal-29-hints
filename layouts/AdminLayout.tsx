@@ -5,7 +5,7 @@ const AdminLayout: FC<PropsWithChildren> = (props) => {
   return (
     <>
       <header>AdminLayout Header</header>
-      {children}
+      <main>{children}</main>
     </>
   );
 };
