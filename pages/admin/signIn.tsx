@@ -34,7 +34,7 @@ const AdminSignInPage: NextPageWithLayout = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { data, error } = await supabase.auth.signInWithPassword(form);
+    const { error } = await supabase.auth.signInWithPassword(form);
     if (error) {
       console.error("sign in failed", error);
       return;
