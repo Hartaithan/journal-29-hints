@@ -2,6 +2,7 @@ export type Locale = "ru" | "en";
 
 export interface IMainStrings {
   title: string;
+  admin: string;
   welcome: string;
   locale: string;
 }

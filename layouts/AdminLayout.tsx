@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FC, PropsWithChildren } from "react";
+import Footer from "../components/Footer";
 import { main } from "../locales/main";
 
 const AdminLayout: FC<PropsWithChildren> = (props) => {
@@ -16,6 +17,7 @@ const AdminLayout: FC<PropsWithChildren> = (props) => {
       </Head>
       <header>AdminLayout Header</header>
       <main>{children}</main>
+      <Footer />
     </>
   );
 };

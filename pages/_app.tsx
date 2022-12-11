@@ -27,6 +27,7 @@ const App: React.FC<IAppProps<IPageProps>> = (props) => {
       <style jsx global>{`
         * {
           font-family: ${lora.style.fontFamily};
+          font-style: ${lora.style.fontStyle};
         }
       `}</style>
     </SessionContextProvider>
