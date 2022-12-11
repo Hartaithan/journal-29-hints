@@ -2,7 +2,7 @@ import { FC } from "react";
 import styled from "styled-components";
 import Link from "./Link";
 
-const Container = styled.div`
+const Container = styled.footer`
   height: 36px;
   display: flex;
   justify-content: flex-end;

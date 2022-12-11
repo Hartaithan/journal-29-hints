@@ -1,7 +1,11 @@
-import styled from "styled-components";
+import styled, { CSSProperties } from "styled-components";
 
-const Title = styled.p`
-  font-size: 24px;
+interface ITitleProps {
+  fontSize?: CSSProperties["fontSize"];
+}
+
+const Title = styled.p<ITitleProps>`
+  font-size: ${({ fontSize = "24px" }) => fontSize};
   font-weight: 600;
 `;
 
