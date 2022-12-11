@@ -6,8 +6,6 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   color: white;
   box-sizing: border-box;
-  font-family: inherit;
-  font-style: inherit;
 }
 
 html,
