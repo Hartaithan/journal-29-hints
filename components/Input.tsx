@@ -18,10 +18,7 @@ const StyledInput = styled.input`
   border: none;
   color: black;
   margin-bottom: 12px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding: 8px 12px;
 `;
 
 const Label = styled.label`
