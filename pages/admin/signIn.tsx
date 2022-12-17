@@ -48,7 +48,7 @@ const AdminSignInPage: NextPageWithLayout = () => {
       <Form onSubmit={handleSubmit}>
         <Input
           id="email"
-          label="Пароль"
+          label="Почта"
           type="email"
           placeholder="Введите почту"
           value={form.email}
