@@ -12,11 +12,15 @@ interface IAdminBooksPageProps extends IPageProps {
 export const getServerSideProps: GetServerSideProps<
   IAdminBooksPageProps
 > = async (ctx) => {
+  const locale = ctx.locale;
   const supabase = createServerSupabaseClient(ctx);
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  const { data: books, error } = await supabase.from("books").select("*");
+  const { data: books, error } = await supabase
+    .from("books")
+    .select("*")
+    .eq("lang", locale);
 
   if (!session) {
     return {
