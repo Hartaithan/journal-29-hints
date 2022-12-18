@@ -1,4 +1,4 @@
-import { Session } from "@supabase/supabase-js";
+import { Session, User } from "@supabase/supabase-js";
 import { NextPage } from "next";
 import { AppProps } from "next/app";
 import { FC, PropsWithChildren } from "react";
@@ -13,6 +13,7 @@ export interface IAppProps<P> extends AppProps<P> {
 
 export interface IPageProps {
   initialSession: Session;
+  user: User | null;
 }
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & ILayoutProps;
