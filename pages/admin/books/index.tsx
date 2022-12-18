@@ -1,5 +1,6 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import BookItem from "../../../components/BookItem";
 import Flex from "../../../components/Flex";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { IPageProps, NextPageWithLayout } from "../../../models/AppModel";
@@ -12,15 +13,11 @@ interface IAdminBooksPageProps extends IPageProps {
 export const getServerSideProps: GetServerSideProps<
   IAdminBooksPageProps
 > = async (ctx) => {
-  const locale = ctx.locale;
   const supabase = createServerSupabaseClient(ctx);
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  const { data: books, error } = await supabase
-    .from("books")
-    .select("*")
-    .eq("lang", locale);
+  const { data: books, error } = await supabase.from("books").select("*");
 
   if (!session) {
     return {
@@ -50,8 +47,9 @@ const AdminBooksPage: NextPageWithLayout<
   const { books } = props;
   return (
     <Flex direction="column" justify="center" align="center">
-      /admin
-      <p>{JSON.stringify(books)}</p>
+      {books.map((book) => (
+        <BookItem key={book.id} book={book} />
+      ))}
     </Flex>
   );
 };
