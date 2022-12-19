@@ -15,10 +15,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (!session) {
+  if (session) {
     return {
       redirect: {
-        destination: "/admin/",
+        destination: "/admin",
         permanent: false,
       },
     };

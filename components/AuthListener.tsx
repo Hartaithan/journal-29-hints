@@ -1,6 +1,6 @@
 "use client";
 
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FC, useEffect } from "react";
 import { supabase } from "../helpers/supabase";
 
@@ -10,12 +10,12 @@ interface IAuthListenerProps {
 
 const AuthListener: FC<IAuthListenerProps> = (props) => {
   const { accessToken } = props;
-  // const router = useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
       if (session?.access_token !== accessToken) {
-        // router.refresh();
+        router.refresh();
       }
     });
   }, [accessToken]); // eslint-disable-line
