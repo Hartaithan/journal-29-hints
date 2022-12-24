@@ -22,8 +22,8 @@ body,
 }
 
 main {
+  padding: 24px 0;
   flex: 1 1 auto;
-  overflow: auto;
 }
 `;
 

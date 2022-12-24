@@ -5,7 +5,7 @@ import { main } from "../locales/main";
 import Title from "./Title";
 
 const Container = styled.header`
-  height: 36px;
+  min-height: 36px;
   display: flex;
   justify-content: space-between;
   align-items: center;

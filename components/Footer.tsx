@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Link from "./Link";
 
 const Container = styled.footer`
-  height: 36px;
+  min-height: 36px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
