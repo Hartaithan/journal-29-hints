@@ -8,8 +8,7 @@ const Container = styled.footer`
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 0 24px;
   border-top: 1px solid #121212;
 `;
 

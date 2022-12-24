@@ -5,17 +5,23 @@ import styled from "styled-components";
 import { supabase } from "../helpers/supabase";
 import { main } from "../locales/main";
 import Button from "./Button";
+import NavMenu from "./NavMenu";
 import Title from "./Title";
 
 const Container = styled.header`
   min-height: 36px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 0 24px;
   border-bottom: 1px solid #121212;
+  & > * {
+    margin-right: 10px;
+  }
+  & > :last-child {
+    margin-left: auto;
+  }
 `;
 
 const HeaderAdmin: FC = () => {
@@ -38,6 +44,7 @@ const HeaderAdmin: FC = () => {
   return (
     <Container>
       <Title fontSize="14px">{main[locale].admin}</Title>
+      <NavMenu />
       {user ? (
         <Button
           height={24}
