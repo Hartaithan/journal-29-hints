@@ -1,6 +1,11 @@
 import { useRouter } from "next/router";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import styled from "styled-components";
+import { IRoute } from "../models/RouteModel";
+
+interface INavMenuProps {
+  routes: IRoute[];
+}
 
 const Container = styled.div`
   height: 24px;
@@ -10,9 +15,16 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const NavMenu: FC = () => {
+const NavMenu: FC<INavMenuProps> = (props) => {
+  const { routes } = props;
   const router = useRouter();
-  return <Container>{router.pathname}</Container>;
+
+  const title = useMemo(() => {
+    const route = routes.find((route) => route.pathname === router.pathname);
+    return route ? route.title : "Страница не найдена";
+  }, [routes, router]);
+
+  return <Container>{title}</Container>;
 };
 
 export default NavMenu;

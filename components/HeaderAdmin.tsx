@@ -4,9 +4,19 @@ import { FC } from "react";
 import styled from "styled-components";
 import { supabase } from "../helpers/supabase";
 import { main } from "../locales/main";
+import { IRoute } from "../models/RouteModel";
 import Button from "./Button";
 import NavMenu from "./NavMenu";
 import Title from "./Title";
+
+const adminRoutes: IRoute[] = [
+  { id: 1, pathname: "/admin", title: "Админ. панель" },
+  { id: 2, pathname: "/admin/signIn", title: "Вход в админ. панель" },
+  { id: 3, pathname: "/admin/books", title: "Все книги" },
+  { id: 4, pathname: "/admin/books/add", title: "Добавление книги" },
+  { id: 5, pathname: "/admin/books/[id]", title: "Информация о книге" },
+  { id: 6, pathname: "/admin/books/[id]/edit", title: "Редактирование книги" },
+];
 
 const Container = styled.header`
   min-height: 36px;
@@ -44,7 +54,7 @@ const HeaderAdmin: FC = () => {
   return (
     <Container>
       <Title fontSize="14px">{main[locale].admin}</Title>
-      <NavMenu />
+      <NavMenu routes={adminRoutes} />
       {user ? (
         <Button
           height={24}
