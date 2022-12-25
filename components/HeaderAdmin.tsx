@@ -10,12 +10,36 @@ import NavMenu from "./NavMenu";
 import Title from "./Title";
 
 const adminRoutes: IRoute[] = [
-  { id: 1, pathname: "/admin", title: "Админ. панель" },
-  { id: 2, pathname: "/admin/signIn", title: "Вход в админ. панель" },
-  { id: 3, pathname: "/admin/books", title: "Все книги" },
-  { id: 4, pathname: "/admin/books/add", title: "Добавление книги" },
-  { id: 5, pathname: "/admin/books/[id]", title: "Информация о книге" },
-  { id: 6, pathname: "/admin/books/[id]/edit", title: "Редактирование книги" },
+  {
+    id: 1,
+    pathname: "/admin",
+    title: { ru: "Главная", en: "Home" },
+  },
+  {
+    id: 2,
+    pathname: "/admin/signIn",
+    title: { ru: "Вход", en: "Sign in" },
+  },
+  {
+    id: 3,
+    pathname: "/admin/books",
+    title: { ru: "Все книги", en: "All books" },
+  },
+  {
+    id: 4,
+    pathname: "/admin/books/add",
+    title: { ru: "Добавление книги", en: "Add book" },
+  },
+  {
+    id: 5,
+    pathname: "/admin/books/[id]",
+    title: { ru: "Информация о книге", en: "Book details" },
+  },
+  {
+    id: 6,
+    pathname: "/admin/books/[id]/edit",
+    title: { ru: "Редактирование книги", en: "Book edit" },
+  },
 ];
 
 const Container = styled.header`

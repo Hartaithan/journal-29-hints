@@ -18,11 +18,12 @@ const Container = styled.div`
 const NavMenu: FC<INavMenuProps> = (props) => {
   const { routes } = props;
   const router = useRouter();
+  const locale = router.locale || "ru";
 
   const title = useMemo(() => {
     const route = routes.find((route) => route.pathname === router.pathname);
-    return route ? route.title : "Страница не найдена";
-  }, [routes, router]);
+    return route ? route.title[locale] : "Страница не найдена";
+  }, [routes, router, locale]);
 
   return <Container>{title}</Container>;
 };
