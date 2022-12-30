@@ -8,4 +8,6 @@ export interface IRoute {
   id: number;
   pathname: string;
   title: IRouteTitle;
+  isNavigable: boolean;
+  isVisibleOnAuth: boolean;
 }
