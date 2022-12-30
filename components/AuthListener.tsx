@@ -13,7 +13,7 @@ const AuthListener: FC<IAuthListenerProps> = (props) => {
   const router = useRouter();
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
+    supabase.auth.onAuthStateChange((_, session) => {
       if (session?.access_token !== accessToken) {
         router.refresh();
       }

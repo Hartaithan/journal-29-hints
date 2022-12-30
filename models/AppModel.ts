@@ -16,4 +16,5 @@ export interface IPageProps {
   user: User | null;
 }
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & ILayoutProps;
+export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> &
+  ILayoutProps;
