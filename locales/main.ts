@@ -6,11 +6,13 @@ export const main: ILocaleObject = {
     admin: "Admin Panel",
     welcome: "Welcome to",
     locale: "Locale:",
+    notFound: "Page not found",
   },
   ru: {
     title: "Дневник 29 Подсказки",
     admin: "Админ. панель",
     welcome: "Добро пожаловать в",
     locale: "Локаль:",
+    notFound: "Страницы не существует",
   },
 };

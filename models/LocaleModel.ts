@@ -5,6 +5,7 @@ export interface IMainStrings {
   admin: string;
   welcome: string;
   locale: string;
+  notFound: string;
 }
 
 export interface ILocaleObject {
