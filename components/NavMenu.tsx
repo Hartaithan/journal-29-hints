@@ -1,7 +1,8 @@
 import { useUser } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
-import { FC, useMemo, useState } from "react";
+import { FC, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
+import useOnClickOutside from "../hooks/useOnClickOutside";
 import { IRoute } from "../models/RouteModel";
 
 const MENU_HEIGHT = 24;
@@ -43,6 +44,7 @@ const NavMenu: FC<INavMenuProps> = (props) => {
   const { routes } = props;
   const router = useRouter();
   const user = useUser();
+  const ref = useRef<HTMLDivElement | null>(null);
   const locale = router.locale || "ru";
 
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -60,13 +62,19 @@ const NavMenu: FC<INavMenuProps> = (props) => {
     closeMenu();
   };
 
+  const handleClickOutside = () => {
+    closeMenu();
+  };
+
+  useOnClickOutside(ref, handleClickOutside);
+
   const title = useMemo(() => {
     const route = routes.find((route) => route.pathname === router.pathname);
     return route ? route.title[locale] : "Страница не найдена";
   }, [routes, router, locale]);
 
   return (
-    <Container onClick={toggleMenu}>
+    <Container ref={ref} onClick={toggleMenu}>
       {title}
       {isOpen && (
         <List>
