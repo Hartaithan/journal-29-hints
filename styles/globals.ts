@@ -25,6 +25,11 @@ main {
   padding: 24px 0;
   flex: 1 1 auto;
 }
+
+button {
+  border: none;
+  outline: none;
+}
 `;
 
 export default GlobalStyle;
