@@ -7,3 +7,5 @@ export interface IBook {
   title: string;
   lang: Locale;
 }
+
+export type IBookPayload = Pick<IBook, "title" | "lang">;

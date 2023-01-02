@@ -1,16 +1,17 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 import Flex from "../../../components/Flex";
 import Form from "../../../components/Form";
 import Input from "../../../components/Input";
 import Select from "../../../components/Select";
+import { supabase } from "../../../helpers/supabase";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { NextPageWithLayout } from "../../../models/AppModel";
+import { IBookPayload } from "../../../models/BookModel";
 import { Locale } from "../../../models/LocaleModel";
 import { IOption } from "../../../models/OptionModel";
 
-interface IForm {
-  title: string;
-  lang: Locale;
+interface IForm extends IBookPayload {
   pages: number;
 }
 
@@ -20,6 +21,7 @@ const langOptions: IOption<Locale>[] = [
 ];
 
 const AdminBookAddPage: NextPageWithLayout = () => {
+  const router = useRouter();
   const [form, setForm] = useState<IForm>({
     title: "",
     lang: "en",
@@ -28,12 +30,15 @@ const AdminBookAddPage: NextPageWithLayout = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    alert(JSON.stringify(form, null, 2));
-    // const { error } = await supabase.from("books").insert([form]);
-    // if (error) {
-    //   console.error("failed to insert new book", error);
-    // }
-    // router.push("/admin");
+    const bookPayload: IBookPayload = {
+      title: form.title,
+      lang: form.lang,
+    };
+    const { error } = await supabase.from("books").insert([bookPayload]);
+    if (error) {
+      console.error("failed to insert new book", error);
+    }
+    router.push("/admin/books");
   };
 
   const handleLang = (option: IOption<Locale>) => {
