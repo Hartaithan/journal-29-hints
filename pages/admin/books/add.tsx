@@ -1,15 +1,17 @@
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { useState } from "react";
 import Flex from "../../../components/Flex";
 import Form from "../../../components/Form";
 import Input from "../../../components/Input";
 import Select from "../../../components/Select";
-import { supabase } from "../../../helpers/supabase";
+import { toWordsOrdinal } from "../../../helpers/ordinal";
+// import { supabase } from "../../../helpers/supabase";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { NextPageWithLayout } from "../../../models/AppModel";
 import { IBookPayload } from "../../../models/BookModel";
 import { Locale } from "../../../models/LocaleModel";
 import { IOption } from "../../../models/OptionModel";
+import { IPagePayload } from "../../../models/PageMode";
 
 interface IForm extends IBookPayload {
   pages: number;
@@ -21,12 +23,22 @@ const langOptions: IOption<Locale>[] = [
 ];
 
 const AdminBookAddPage: NextPageWithLayout = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const [form, setForm] = useState<IForm>({
     title: "",
     lang: "en",
     pages: 64,
   });
+
+  const generatePagesContent = (book_id: number, pagesLength: number) => {
+    const pages: IPagePayload[] = [];
+    for (let i = 0; i < pagesLength; i++) {
+      const value = i + 1;
+      const label = `label of ${toWordsOrdinal(value)} page`;
+      pages.push({ value, label, book_id, lang: form.lang });
+    }
+    return pages;
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,11 +46,15 @@ const AdminBookAddPage: NextPageWithLayout = () => {
       title: form.title,
       lang: form.lang,
     };
-    const { error } = await supabase.from("books").insert([bookPayload]);
-    if (error) {
-      console.error("failed to insert new book", error);
-    }
-    router.push("/admin/books");
+    console.info(JSON.stringify(bookPayload, null, 2));
+    // const { error } = await supabase.from("books").insert([bookPayload]);
+    // if (error) {
+    //   console.error("failed to insert new book", error);
+    // }
+    const pages = generatePagesContent(1, form.pages);
+    console.info(JSON.stringify(pages, null, 2));
+    // const {error} = await supabase.from('pages').insert(pages)
+    // router.push("/admin");
   };
 
   const handleLang = (option: IOption<Locale>) => {
@@ -54,6 +70,16 @@ const AdminBookAddPage: NextPageWithLayout = () => {
           placeholder="Введите название книги"
           value={form.title}
           onChange={(event) => setForm({ ...form, title: event.target.value })}
+        />
+        <Input
+          id="pages"
+          label="Количество страниц"
+          type="number"
+          placeholder="Введите количество страниц"
+          value={form.pages}
+          onChange={(event) =>
+            setForm({ ...form, pages: Number(event.target.value) })
+          }
         />
         <Select
           label="Язык"
