@@ -15,6 +15,10 @@ interface ISelectProps {
   options: IOption[];
 }
 
+interface IListProps {
+  withLabel: boolean;
+}
+
 const Container = styled.div`
   position: relative;
   min-height: ${MENU_HEIGHT}px;
@@ -26,8 +30,8 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-const List = styled.div`
-  top: ${MENU_HEIGHT + 12}px;
+const List = styled.div<IListProps>`
+  top: ${({ withLabel }) => `${MENU_HEIGHT + 12 + (withLabel ? 23 : 0)}px`};
   width: ${MENU_WIDTH}px;
   min-height: 24px;
   position: absolute;
@@ -96,7 +100,7 @@ const Select: FC<ISelectProps> = (props) => {
           "Значение не найдено"}
       </ListValue>
       {isOpen && (
-        <List>
+        <List withLabel={!!label}>
           {options.map((option) => (
             <ListItem key={option.id} onClick={() => handleItemClick(option)}>
               <ListItemTitle>{option.label}</ListItemTitle>
