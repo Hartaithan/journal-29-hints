@@ -4,7 +4,6 @@ import Flex from "../../../components/Flex";
 import Form from "../../../components/Form";
 import Input from "../../../components/Input";
 import Select from "../../../components/Select";
-import { toWordsOrdinal } from "../../../helpers/ordinal";
 // import { supabase } from "../../../helpers/supabase";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { NextPageWithLayout } from "../../../models/AppModel";
@@ -34,8 +33,7 @@ const AdminBookAddPage: NextPageWithLayout = () => {
     const pages: IPagePayload[] = [];
     for (let i = 0; i < pagesLength; i++) {
       const value = i + 1;
-      const label = `label of ${toWordsOrdinal(value)} page`;
-      pages.push({ value, label, book_id, lang: form.lang });
+      pages.push({ value, book_id, lang: form.lang });
     }
     return pages;
   };
