@@ -1,10 +1,10 @@
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import Flex from "../../../components/Flex";
 import Form from "../../../components/Form";
 import Input from "../../../components/Input";
 import Select from "../../../components/Select";
-// import { supabase } from "../../../helpers/supabase";
+import { supabase } from "../../../helpers/supabase";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { NextPageWithLayout } from "../../../models/AppModel";
 import { IBookPayload } from "../../../models/BookModel";
@@ -22,7 +22,7 @@ const langOptions: IOption<Locale>[] = [
 ];
 
 const AdminBookAddPage: NextPageWithLayout = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const [form, setForm] = useState<IForm>({
     title: "",
     lang: "en",
@@ -44,15 +44,20 @@ const AdminBookAddPage: NextPageWithLayout = () => {
       title: form.title,
       lang: form.lang,
     };
-    console.info(JSON.stringify(bookPayload, null, 2));
-    // const { error } = await supabase.from("books").insert([bookPayload]);
-    // if (error) {
-    //   console.error("failed to insert new book", error);
-    // }
-    const pages = generatePagesContent(1, form.pages);
-    console.info(JSON.stringify(pages, null, 2));
-    // const {error} = await supabase.from('pages').insert(pages)
-    // router.push("/admin");
+    const { data: book, error: bookError } = await supabase
+      .from("books")
+      .insert(bookPayload)
+      .select()
+      .single();
+    if (bookError) {
+      console.error("failed to insert new book", bookError);
+    }
+    const pages = generatePagesContent(book.id, form.pages);
+    const { error: pagesError } = await supabase.from("pages").insert(pages);
+    if (pagesError) {
+      console.error("failed to insert new pages", pagesError);
+    }
+    router.push("/admin/books");
   };
 
   const handleLang = (option: IOption<Locale>) => {
