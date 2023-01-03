@@ -7,7 +7,7 @@ import Select from "../../../components/Select";
 import { supabase } from "../../../helpers/supabase";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { NextPageWithLayout } from "../../../models/AppModel";
-import { IBookPayload } from "../../../models/BookModel";
+import { IBook, IBookPayload } from "../../../models/BookModel";
 import { Locale } from "../../../models/LocaleModel";
 import { IOption } from "../../../models/OptionModel";
 import { IPagePayload } from "../../../models/PageMode";
@@ -38,8 +38,7 @@ const AdminBookAddPage: NextPageWithLayout = () => {
     return pages;
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const createBook = async (): Promise<IBook | null> => {
     const bookPayload: IBookPayload = {
       title: form.title,
       lang: form.lang,
@@ -51,13 +50,27 @@ const AdminBookAddPage: NextPageWithLayout = () => {
       .single();
     if (bookError) {
       console.error("failed to insert new book", bookError);
+      return null;
     }
-    const pages = generatePagesContent(book.id, form.pages);
+    return book as IBook;
+  };
+
+  const createPages = async (book_id: number) => {
+    const pages = generatePagesContent(book_id, form.pages);
     const { error: pagesError } = await supabase.from("pages").insert(pages);
     if (pagesError) {
       console.error("failed to insert new pages", pagesError);
     }
-    router.push("/admin/books");
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const book = await createBook();
+    if (book) {
+      createPages(book.id).then(() => {
+        router.push("/admin/books");
+      });
+    }
   };
 
   const handleLang = (option: IOption<Locale>) => {
