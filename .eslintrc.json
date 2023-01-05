@@ -13,7 +13,8 @@
         "varsIgnorePattern": "^_",
         "argsIgnorePattern": "^_"
       }
-    ]
+    ],
+    "@typescript-eslint/no-empty-interface": "off"
   },
   "root": true
 }
