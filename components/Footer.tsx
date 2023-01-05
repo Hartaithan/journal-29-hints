@@ -9,7 +9,7 @@ const Container = styled.footer`
   align-items: center;
   width: 100%;
   padding: 0 24px;
-  border-top: 1px solid #121212;
+  border-top: 1px solid ${({ theme }) => theme.colors.darkGrey};
 `;
 
 const Footer: FC = () => {

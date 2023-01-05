@@ -35,15 +35,15 @@ const List = styled.div<IListProps>`
   width: ${MENU_WIDTH}px;
   min-height: 24px;
   position: absolute;
-  border: 1px solid #121212;
+  border: 1px solid ${({ theme }) => theme.colors.darkGrey};
 `;
 
 const ListItem = styled.div`
   height: 24px;
   padding: 4px 8px;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors.white};
   &:hover {
-    background: #dbdbdb;
+    background: ${({ theme }) => theme.colors.grey};
   }
 `;
 
@@ -55,7 +55,7 @@ const ListItemTitle = styled.p`
 const ListValue = styled.p`
   height: 30px;
   width: 200px;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors.white};
   outline: none;
   border: none;
   color: black;

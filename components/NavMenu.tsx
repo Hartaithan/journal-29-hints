@@ -28,7 +28,7 @@ const List = styled.div`
   width: ${MENU_WIDTH}px;
   min-height: 24px;
   position: absolute;
-  border: 1px solid #121212;
+  border: 1px solid ${({ theme }) => theme.colors.darkGrey};
 `;
 
 const ListItem = styled.div`

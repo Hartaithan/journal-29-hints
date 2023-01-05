@@ -10,7 +10,7 @@ const Badge = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ffffff33;
+  background: ${({ theme }) => theme.colors.white}33;
   border-radius: 4px;
   padding: 4px 8px;
   margin-left: 10px;

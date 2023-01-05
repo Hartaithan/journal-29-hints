@@ -11,7 +11,7 @@ const Container = styled.header`
   align-items: center;
   width: 100%;
   padding: 0 24px;
-  border-bottom: 1px solid #121212;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.darkGrey};
 `;
 
 const Header: FC = () => {

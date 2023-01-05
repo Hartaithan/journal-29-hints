@@ -8,11 +8,14 @@ interface IButtonProps {
 
 const Button = styled.button<IButtonProps>`
   height: ${({ height }) => height + "px" || "auto"};
-  background: #ffffff;
-  color: #000000;
+  background: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.black};
   font-size: ${({ fontSize }) => fontSize + "px" || "12px"};
   padding: ${({ padding }) => padding || "8px 12px"};
   cursor: pointer;
+  &:hover {
+    background: ${({ theme }) => theme.colors.lightGrey};
+  }
 `;
 
 export default Button;

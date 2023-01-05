@@ -13,10 +13,10 @@ const Container = styled.div`
 const StyledInput = styled.input`
   height: 30px;
   width: 200px;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors.white};
   outline: none;
   border: none;
-  color: black;
+  color: ${({ theme }) => theme.colors.black};
   margin-bottom: 12px;
   padding: 8px 12px;
 `;
