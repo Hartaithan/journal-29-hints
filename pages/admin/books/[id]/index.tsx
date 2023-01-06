@@ -4,9 +4,11 @@ import Flex from "../../../../components/Flex";
 import AdminLayout from "../../../../layouts/AdminLayout";
 import { IPageProps, NextPageWithLayout } from "../../../../models/AppModel";
 import { IBook } from "../../../../models/BookModel";
+import { IPage } from "../../../../models/PageMode";
 
 interface IAdminBookPageProps extends IPageProps {
   book: IBook | null;
+  pages: IPage[] | null;
 }
 
 export const getServerSideProps: GetServerSideProps<
@@ -17,11 +19,24 @@ export const getServerSideProps: GetServerSideProps<
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  const { data: book, error } = await supabase
+  const { data: book, error: bookError } = await supabase
     .from("books")
     .select("*")
     .eq("id", id)
     .single();
+
+  if (bookError) {
+    console.error("get book error", bookError);
+  }
+
+  const { data: pages, error: pagesError } = await supabase
+    .from("pages")
+    .select("*")
+    .eq("book_id", id);
+
+  if (pagesError) {
+    console.error("get book pages error", pagesError);
+  }
 
   if (!session) {
     return {
@@ -32,15 +47,12 @@ export const getServerSideProps: GetServerSideProps<
     };
   }
 
-  if (error) {
-    console.error("get book error", error);
-  }
-
   return {
     props: {
       initialSession: session,
       user: session.user,
       book: book || null,
+      pages: pages || null,
     },
   };
 };
@@ -48,10 +60,16 @@ export const getServerSideProps: GetServerSideProps<
 const AdminBookPage: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = (props) => {
-  const { book } = props;
+  const { book, pages } = props;
   return (
     <Flex direction="column" justify="center" align="center">
-      {JSON.stringify(book, null, 2)}
+      <p style={{ whiteSpace: "pre" }}>
+        Book{"\n\n"}
+        {JSON.stringify(book, null, 2)}
+        {"\n\n"}
+        Pages{"\n\n"}
+        {JSON.stringify(pages, null, 2)}
+      </p>
     </Flex>
   );
 };
