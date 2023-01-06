@@ -19,24 +19,6 @@ export const getServerSideProps: GetServerSideProps<
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  const { data: book, error: bookError } = await supabase
-    .from("books")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-  if (bookError) {
-    console.error("get book error", bookError);
-  }
-
-  const { data: pages, error: pagesError } = await supabase
-    .from("pages")
-    .select("*")
-    .eq("book_id", id);
-
-  if (pagesError) {
-    console.error("get book pages error", pagesError);
-  }
 
   if (!session) {
     return {
@@ -45,6 +27,20 @@ export const getServerSideProps: GetServerSideProps<
         permanent: false,
       },
     };
+  }
+
+  const [{ data: book, error: bookError }, { data: pages, error: pagesError }] =
+    await Promise.all([
+      supabase.from("books").select("*").eq("id", id).single(),
+      supabase.from("pages").select("*").eq("book_id", id),
+    ]);
+
+  if (bookError) {
+    console.error("get book error", bookError);
+  }
+
+  if (pagesError) {
+    console.error("get book pages error", pagesError);
   }
 
   return {
