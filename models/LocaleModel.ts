@@ -1,3 +1,5 @@
+import { MainLocales } from "../locales/main";
+
 export type Locale = "ru" | "en";
 
 export interface IMainStrings {
@@ -9,5 +11,5 @@ export interface IMainStrings {
 }
 
 export interface ILocaleObject {
-  [key: Locale | string]: IMainStrings;
+  [key: Locale | string]: MainLocales;
 }
