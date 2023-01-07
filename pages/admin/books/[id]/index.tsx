@@ -1,6 +1,9 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { useMemo } from "react";
 import Flex from "../../../../components/Flex";
+import Value from "../../../../components/Value";
+import { langOptions } from "../../../../constants/options";
 import AdminLayout from "../../../../layouts/AdminLayout";
 import { IPageProps, NextPageWithLayout } from "../../../../models/AppModel";
 import { IBook } from "../../../../models/BookModel";
@@ -57,8 +60,27 @@ const AdminBookPage: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = (props) => {
   const { book, pages } = props;
+
+  const langLabel = useMemo(() => {
+    if (!book) return null;
+    const route = langOptions.find((lang) => lang.value === book?.lang);
+    return route?.label || null;
+  }, [book]);
+
   return (
     <Flex direction="column" justify="center" align="center">
+      {book && <Value label="Название">{book.title}</Value>}
+      {langLabel && <Value label="Язык">{langLabel}</Value>}
+      {book && book.created_at && (
+        <Value label="Создано">
+          {new Date(book.created_at).toLocaleString()}
+        </Value>
+      )}
+      {book && book.updated_at && (
+        <Value label="Обновлено">
+          {new Date(book.updated_at).toLocaleString()}
+        </Value>
+      )}
       <p style={{ whiteSpace: "pre" }}>
         Book{"\n\n"}
         {JSON.stringify(book, null, 2)}

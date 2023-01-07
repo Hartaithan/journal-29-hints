@@ -4,6 +4,7 @@ import Flex from "../../../components/Flex";
 import Form from "../../../components/Form";
 import Input from "../../../components/Input";
 import Select from "../../../components/Select";
+import { langOptions } from "../../../constants/options";
 import { supabase } from "../../../helpers/supabase";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { NextPageWithLayout } from "../../../models/AppModel";
@@ -15,11 +16,6 @@ import { IPagePayload } from "../../../models/PageMode";
 interface IForm extends IBookPayload {
   pages: number;
 }
-
-const langOptions: IOption<Locale>[] = [
-  { id: 1, label: "Русский", value: "ru" },
-  { id: 2, label: "English", value: "en" },
-];
 
 const AdminBookAddPage: NextPageWithLayout = () => {
   const router = useRouter();
