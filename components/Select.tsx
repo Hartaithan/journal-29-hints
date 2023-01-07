@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { useRouter } from "next/router";
 import { FC, useRef, useState } from "react";
 import styled from "styled-components";
 import useOnClickOutside from "../hooks/useOnClickOutside";
+import { main } from "../locales/main";
 import { IOption, OptionValue } from "../models/OptionModel";
 
 const MENU_HEIGHT = 24;
@@ -70,6 +72,8 @@ const Label = styled.label`
 
 const Select: FC<ISelectProps> = (props) => {
   const { label = null, value, onChange, options } = props;
+  const router = useRouter();
+  const locale = router.locale || "ru";
   const ref = useRef<HTMLDivElement | null>(null);
   const [isOpen, setOpen] = useState<boolean>(false);
 
@@ -97,7 +101,7 @@ const Select: FC<ISelectProps> = (props) => {
       {label && <Label>{label}</Label>}
       <ListValue>
         {options.find((option) => option.value === value)?.label ||
-          "Значение не найдено"}
+          main[locale].notFound}
       </ListValue>
       {isOpen && (
         <List withLabel={!!label}>

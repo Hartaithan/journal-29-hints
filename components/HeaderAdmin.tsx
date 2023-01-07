@@ -98,7 +98,7 @@ const HeaderAdmin: FC = () => {
           fontSize={10}
           onClick={() => handleSignOut()}
         >
-          Sign out
+          {main[locale].signOut}
         </Button>
       ) : (
         <Button
@@ -107,7 +107,7 @@ const HeaderAdmin: FC = () => {
           fontSize={10}
           onClick={() => handleSignIn()}
         >
-          Sign in
+          {main[locale].signIn}
         </Button>
       )}
     </Container>

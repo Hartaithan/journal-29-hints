@@ -9,7 +9,7 @@ const ErrorPage: NextPage = () => {
   const locale = router.locale || "ru";
   return (
     <Flex direction="column" justify="center" align="center">
-      <Title>{main[locale].notFound}!</Title>
+      <Title>{main[locale].pageNotFound}</Title>
     </Flex>
   );
 };

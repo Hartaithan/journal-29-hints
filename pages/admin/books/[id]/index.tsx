@@ -1,11 +1,13 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { useRouter } from "next/router";
 import { useMemo } from "react";
 import Flex from "../../../../components/Flex";
 import PageItem from "../../../../components/PageItem";
 import Value from "../../../../components/Value";
 import { langOptions } from "../../../../constants/options";
 import AdminLayout from "../../../../layouts/AdminLayout";
+import { books } from "../../../../locales/book";
 import { IPageProps, NextPageWithLayout } from "../../../../models/AppModel";
 import { IBook } from "../../../../models/BookModel";
 import { IPage } from "../../../../models/PageMode";
@@ -61,6 +63,8 @@ const AdminBookPage: NextPageWithLayout<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = (props) => {
   const { book, pages } = props;
+  const router = useRouter();
+  const locale = router.locale || "ru";
 
   const langLabel = useMemo(() => {
     if (!book) return null;
@@ -76,15 +80,19 @@ const AdminBookPage: NextPageWithLayout<
 
   return (
     <Flex direction="column" justify="center" align="center">
-      {book && <Value label="Название">{book.title}</Value>}
-      {langLabel && <Value label="Язык">{langLabel}</Value>}
+      {book && (
+        <Value label={books[locale].inputs.title.label}>{book.title}</Value>
+      )}
+      {langLabel && (
+        <Value label={books[locale].inputs.lang.label}>{langLabel}</Value>
+      )}
       {book && book.created_at && (
-        <Value label="Создано">
+        <Value label={books[locale].inputs.created_at.label}>
           {new Date(book.created_at).toLocaleString()}
         </Value>
       )}
       {book && book.updated_at && (
-        <Value label="Обновлено">
+        <Value label={books[locale].inputs.updated_at.label}>
           {new Date(book.updated_at).toLocaleString()}
         </Value>
       )}

@@ -7,6 +7,7 @@ import Form from "../../components/Form";
 import Input from "../../components/Input";
 import { supabase } from "../../helpers/supabase";
 import AdminLayout from "../../layouts/AdminLayout";
+import { main } from "../../locales/main";
 import { NextPageWithLayout } from "../../models/AppModel";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -29,6 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 const AdminSignInPage: NextPageWithLayout = () => {
   const router = useRouter();
+  const locale = router.locale || "ru";
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -49,23 +51,23 @@ const AdminSignInPage: NextPageWithLayout = () => {
       <Form onSubmit={handleSubmit}>
         <Input
           id="email"
-          label="Почта"
           type="email"
-          placeholder="Введите почту"
+          label={main[locale].inputs.email.label}
+          placeholder={main[locale].inputs.email.placeholder}
           value={form.email}
           onChange={(event) => setForm({ ...form, email: event.target.value })}
         />
         <Input
           id="password"
-          label="Пароль"
           type="password"
-          placeholder="Введите пароль"
+          label={main[locale].inputs.password.label}
+          placeholder={main[locale].inputs.password.placeholder}
           value={form.password}
           onChange={(event) =>
             setForm({ ...form, password: event.target.value })
           }
         />
-        <Input type="submit" />
+        <Input type="submit" value={main[locale].submit} />
       </Form>
     </Flex>
   );

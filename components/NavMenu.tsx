@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { FC, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import useOnClickOutside from "../hooks/useOnClickOutside";
+import { main } from "../locales/main";
 import { IRoute } from "../models/RouteModel";
 
 const MENU_HEIGHT = 24;
@@ -70,7 +71,7 @@ const NavMenu: FC<INavMenuProps> = (props) => {
 
   const title = useMemo(() => {
     const route = routes.find((route) => route.pathname === router.pathname);
-    return route ? route.title[locale] : "Страница не найдена";
+    return route ? route.title[locale] : main[locale].pageNotFound;
   }, [routes, router, locale]);
 
   return (

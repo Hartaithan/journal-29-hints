@@ -7,6 +7,8 @@ import Select from "../../../components/Select";
 import { langOptions } from "../../../constants/options";
 import { supabase } from "../../../helpers/supabase";
 import AdminLayout from "../../../layouts/AdminLayout";
+import { books } from "../../../locales/book";
+import { main } from "../../../locales/main";
 import { NextPageWithLayout } from "../../../models/AppModel";
 import { IBook, IBookPayload } from "../../../models/BookModel";
 import { Locale } from "../../../models/LocaleModel";
@@ -19,6 +21,7 @@ interface IForm extends IBookPayload {
 
 const AdminBookAddPage: NextPageWithLayout = () => {
   const router = useRouter();
+  const locale = router.locale || "ru";
   const [form, setForm] = useState<IForm>({
     title: "",
     lang: "en",
@@ -78,28 +81,28 @@ const AdminBookAddPage: NextPageWithLayout = () => {
       <Form onSubmit={handleSubmit}>
         <Input
           id="title"
-          label="Название книги"
-          placeholder="Введите название книги"
+          label={books[locale].inputs.title.label}
+          placeholder={books[locale].inputs.title.placeholder}
           value={form.title}
           onChange={(event) => setForm({ ...form, title: event.target.value })}
         />
         <Input
           id="pages"
-          label="Количество страниц"
+          label={books[locale].inputs.pages.label}
+          placeholder={books[locale].inputs.pages.placeholder}
           type="number"
-          placeholder="Введите количество страниц"
           value={form.pages}
           onChange={(event) =>
             setForm({ ...form, pages: Number(event.target.value) })
           }
         />
         <Select
-          label="Язык"
+          label={books[locale].inputs.lang.label}
           value={form.lang}
           options={langOptions}
           onChange={handleLang}
         />
-        <Input type="submit" />
+        <Input type="submit" value={main[locale].submit} />
       </Form>
     </Flex>
   );
