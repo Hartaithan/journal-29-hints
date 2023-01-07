@@ -19,7 +19,7 @@ const Header: FC = () => {
   const locale = router.locale || "ru";
   return (
     <Container>
-      <Title fontSize="14px">{main[locale].title}</Title>
+      <Title fontSize={14}>{main[locale].title}</Title>
     </Container>
   );
 };

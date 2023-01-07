@@ -1,39 +1,38 @@
 import { useRouter } from "next/router";
 import { FC } from "react";
 import styled from "styled-components";
-import { IBook } from "../models/BookModel";
-import LanguageBadge from "./LanguageBadge";
+import { IPage } from "../models/PageMode";
 import Title from "./Title";
 
-interface IBookItemProps {
-  book: IBook;
+interface IPageItemProps {
+  page: IPage;
 }
 
 const Container = styled.div`
   min-height: 36px;
+  min-width: 200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
 `;
 
-const BookItem: FC<IBookItemProps> = (props) => {
-  const { book } = props;
-  const { id, title, lang } = book;
+const PageItem: FC<IPageItemProps> = (props) => {
+  const { page } = props;
+  const { id, value, book_id } = page;
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/admin/books/${id}`);
+    router.push(`/admin/books/${book_id}/pages/${id}`);
   };
 
   return (
     <Container onClick={() => handleClick()}>
       <Title fontSize={14} fontWeight={400}>
-        {title}
+        Страница: {value}
       </Title>
-      <LanguageBadge lang={lang} />
     </Container>
   );
 };
 
-export default BookItem;
+export default PageItem;

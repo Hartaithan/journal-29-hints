@@ -89,7 +89,7 @@ const HeaderAdmin: FC = () => {
 
   return (
     <Container>
-      <Title fontSize="14px">{main[locale].admin}</Title>
+      <Title fontSize={14}>{main[locale].admin}</Title>
       <NavMenu routes={adminRoutes} />
       {user ? (
         <Button

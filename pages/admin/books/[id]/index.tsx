@@ -2,6 +2,7 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useMemo } from "react";
 import Flex from "../../../../components/Flex";
+import PageItem from "../../../../components/PageItem";
 import Value from "../../../../components/Value";
 import { langOptions } from "../../../../constants/options";
 import AdminLayout from "../../../../layouts/AdminLayout";
@@ -67,6 +68,12 @@ const AdminBookPage: NextPageWithLayout<
     return route?.label || null;
   }, [book]);
 
+  const sortedPages: IPage[] = useMemo(() => {
+    if (!pages) return [];
+    const sorted = [...pages].sort((a, b) => a.value - b.value);
+    return sorted;
+  }, [pages]);
+
   return (
     <Flex direction="column" justify="center" align="center">
       {book && <Value label="Название">{book.title}</Value>}
@@ -81,13 +88,9 @@ const AdminBookPage: NextPageWithLayout<
           {new Date(book.updated_at).toLocaleString()}
         </Value>
       )}
-      <p style={{ whiteSpace: "pre" }}>
-        Book{"\n\n"}
-        {JSON.stringify(book, null, 2)}
-        {"\n\n"}
-        Pages{"\n\n"}
-        {JSON.stringify(pages, null, 2)}
-      </p>
+      {sortedPages.map((page) => (
+        <PageItem key={page.id} page={page} />
+      ))}
     </Flex>
   );
 };
