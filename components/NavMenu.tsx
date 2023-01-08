@@ -92,7 +92,14 @@ const NavMenu: FC<INavMenuProps> = (props) => {
           })}
         </List>
       )}
-      <ArrowIcon height={24} width={24} />
+      <ArrowIcon
+        style={{
+          transition: "transform 0.3s ease-in-out",
+          transform: `rotate(${isOpen ? "0.5turn" : 0})`,
+        }}
+        height={24}
+        width={24}
+      />
     </Container>
   );
 };
