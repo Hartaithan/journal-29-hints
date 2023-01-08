@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { FC, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import useOnClickOutside from "../hooks/useOnClickOutside";
+import ArrowIcon from "../icons/Arrow";
 import { main } from "../locales/main";
 import { IRoute } from "../models/RouteModel";
 
@@ -91,6 +92,7 @@ const NavMenu: FC<INavMenuProps> = (props) => {
           })}
         </List>
       )}
+      <ArrowIcon height={24} width={24} />
     </Container>
   );
 };
