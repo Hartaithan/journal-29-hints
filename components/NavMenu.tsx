@@ -71,7 +71,7 @@ const NavMenu: FC<INavMenuProps> = (props) => {
   useOnClickOutside(ref, handleClickOutside);
 
   const title = useMemo(() => {
-    const route = routes.find((route) => route.pathname === router.pathname);
+    const route = routes.find((item) => item.pathname === router.pathname);
     return route ? route.title[locale] : main[locale].pageNotFound;
   }, [routes, router, locale]);
 

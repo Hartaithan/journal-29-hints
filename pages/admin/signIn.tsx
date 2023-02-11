@@ -11,10 +11,10 @@ import { main } from "../../locales/main";
 import { NextPageWithLayout } from "../../models/AppModel";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const supabase = createServerSupabaseClient(ctx);
+  const supabaseClient = createServerSupabaseClient(ctx);
   const {
     data: { session },
-  } = await supabase.auth.getSession();
+  } = await supabaseClient.auth.getSession();
 
   if (session) {
     return {

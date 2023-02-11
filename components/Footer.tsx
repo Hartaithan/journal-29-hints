@@ -12,14 +12,12 @@ const Container = styled.footer`
   border-top: 1px solid ${({ theme }) => theme.colors.darkGrey};
 `;
 
-const Footer: FC = () => {
-  return (
-    <Container>
-      <Link href="https://hartaithan.github.io/" target="_blank">
-        Hartaithan.
-      </Link>
-    </Container>
-  );
-};
+const Footer: FC = () => (
+  <Container>
+    <Link href="https://hartaithan.github.io/" target="_blank">
+      Hartaithan.
+    </Link>
+  </Container>
+);
 
 export default Footer;

@@ -7,10 +7,10 @@ interface IButtonProps {
 }
 
 const Button = styled.button<IButtonProps>`
-  height: ${({ height }) => height + "px" || "auto"};
+  height: ${({ height }) => `${height}px` || "auto"};
   background: ${({ theme }) => theme.colors.white};
   color: ${({ theme }) => theme.colors.black};
-  font-size: ${({ fontSize }) => fontSize + "px" || "12px"};
+  font-size: ${({ fontSize }) => `${fontSize}px` || "12px"};
   padding: ${({ padding }) => padding || "8px 12px"};
   cursor: pointer;
   &:hover {

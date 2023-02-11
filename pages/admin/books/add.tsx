@@ -30,7 +30,7 @@ const AdminBookAddPage: NextPageWithLayout = () => {
 
   const generatePagesContent = (book_id: number, pagesLength: number) => {
     const pages: IPagePayload[] = [];
-    for (let i = 0; i < pagesLength; i++) {
+    for (let i = 0; i < pagesLength; i += 1) {
       const value = i + 1;
       pages.push({ value, book_id, lang: form.lang });
     }

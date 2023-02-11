@@ -65,19 +65,20 @@ const ordinalLessThanThirteen: { [key: string]: string } = {
   twelve: "twelfth",
 };
 
-const replaceWithOrdinalVariant = (numberWord: string) => {
-  return ordinalLessThanThirteen[numberWord];
-};
+const replaceWithOrdinalVariant = (numberWord: string) =>
+  ordinalLessThanThirteen[numberWord];
 
 const makeOrdinal = (words: string): string => {
   if (
     ENDS_WITH_DOUBLE_ZERO_PATTERN.test(words) ||
     ENDS_WITH_TEEN_PATTERN.test(words)
   ) {
-    return words + "th";
-  } else if (ENDS_WITH_Y_PATTERN.test(words)) {
+    return `${words}th`;
+  }
+  if (ENDS_WITH_Y_PATTERN.test(words)) {
     return words.replace(ENDS_WITH_Y_PATTERN, "ieth");
-  } else if (ENDS_WITH_ZERO_THROUGH_TWELVE_PATTERN.test(words)) {
+  }
+  if (ENDS_WITH_ZERO_THROUGH_TWELVE_PATTERN.test(words)) {
     return words.replace(
       ENDS_WITH_ZERO_THROUGH_TWELVE_PATTERN,
       replaceWithOrdinalVariant
@@ -86,17 +87,9 @@ const makeOrdinal = (words: string): string => {
   return words;
 };
 
-const toWords = (number: number, asOrdinal = false): string => {
-  if (!isFinite(number)) {
-    throw new TypeError(
-      "Not a finite number: " + number + " (" + typeof number + ")"
-    );
-  }
-  const words = generateWords(number);
-  return asOrdinal ? makeOrdinal(words) : words;
-};
-
-const generateWords = (number: number, words: string[] = []): string => {
+const generateWords = (num: number, input: string[] = []): string => {
+  let number = num;
+  let words = [...input];
   let remainder = 0;
   let word = LESS_THAN_TWENTY[number];
 
@@ -120,32 +113,41 @@ const generateWords = (number: number, words: string[] = []): string => {
     remainder = number % TEN;
     word = TENTHS_LESS_THAN_HUNDRED[Math.floor(number / TEN)];
     if (remainder) {
-      word += "-" + LESS_THAN_TWENTY[remainder];
+      word += `-${LESS_THAN_TWENTY[remainder]}`;
       remainder = 0;
     }
   } else if (number < ONE_THOUSAND) {
     remainder = number % ONE_HUNDRED;
-    word = generateWords(Math.floor(number / ONE_HUNDRED)) + " hundred";
+    word = `${generateWords(Math.floor(number / ONE_HUNDRED))} hundred`;
   } else if (number < ONE_MILLION) {
     remainder = number % ONE_THOUSAND;
-    word = generateWords(Math.floor(number / ONE_THOUSAND)) + " thousand,";
+    word = `${generateWords(Math.floor(number / ONE_THOUSAND))} thousand,`;
   } else if (number < ONE_BILLION) {
     remainder = number % ONE_MILLION;
-    word = generateWords(Math.floor(number / ONE_MILLION)) + " million,";
+    word = `${generateWords(Math.floor(number / ONE_MILLION))} million,`;
   } else if (number < ONE_TRILLION) {
     remainder = number % ONE_BILLION;
-    word = generateWords(Math.floor(number / ONE_BILLION)) + " billion,";
+    word = `${generateWords(Math.floor(number / ONE_BILLION))} billion,`;
   } else if (number < ONE_QUADRILLION) {
     remainder = number % ONE_TRILLION;
-    word = generateWords(Math.floor(number / ONE_TRILLION)) + " trillion,";
+    word = `${generateWords(Math.floor(number / ONE_TRILLION))} trillion,`;
   } else if (number <= MAX) {
     remainder = number % ONE_QUADRILLION;
-    word =
-      generateWords(Math.floor(number / ONE_QUADRILLION)) + " quadrillion,";
+    word = `${generateWords(
+      Math.floor(number / ONE_QUADRILLION)
+    )} quadrillion,`;
   }
 
   words.push(word);
   return generateWords(remainder, words);
+};
+
+const toWords = (number: number, asOrdinal = false): string => {
+  if (!Number.isFinite(number)) {
+    throw new TypeError(`Not a finite number: ${number} (${typeof number})`);
+  }
+  const words = generateWords(number);
+  return asOrdinal ? makeOrdinal(words) : words;
 };
 
 export const toWordsOrdinal = (number: number): string => {

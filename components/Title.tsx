@@ -6,7 +6,7 @@ interface ITitleProps {
 }
 
 const Title = styled.p<ITitleProps>`
-  font-size: ${({ fontSize = 24 }) => fontSize + "px"};
+  font-size: ${({ fontSize = 24 }) => `${fontSize}px`};
   font-weight: ${({ fontWeight = 600 }) => fontWeight};
 `;
 

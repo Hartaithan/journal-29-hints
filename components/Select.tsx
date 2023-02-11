@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { useRouter } from "next/router";
 import { FC, useRef, useState } from "react";
 import styled from "styled-components";

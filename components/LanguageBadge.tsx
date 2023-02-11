@@ -21,12 +21,10 @@ const Value = styled.p`
   font-size: 10px;
 `;
 
-const LanguageBadge: FC<ILanguageBadgeProps> = ({ lang }) => {
-  return (
-    <Badge>
-      <Value>{lang}</Value>
-    </Badge>
-  );
-};
+const LanguageBadge: FC<ILanguageBadgeProps> = ({ lang }) => (
+  <Badge>
+    <Value>{lang}</Value>
+  </Badge>
+);
 
 export default LanguageBadge;

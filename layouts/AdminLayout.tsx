@@ -15,10 +15,8 @@ const AdminLayout: FC<PropsWithChildren> = (props) => {
   const [session, setSession] = useState<Session | null>(null);
 
   const getSession = async () => {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    setSession(session);
+    const { data } = await supabase.auth.getSession();
+    setSession(data.session);
   };
 
   useEffect(() => {

@@ -27,13 +27,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   };
 };
 
-const AdminPage: NextPageWithLayout = () => {
-  return (
-    <Flex direction="column" justify="center" align="center">
-      /admin
-    </Flex>
-  );
-};
+const AdminPage: NextPageWithLayout = () => (
+  <Flex direction="column" justify="center" align="center">
+    /admin
+  </Flex>
+);
 
 AdminPage.Layout = AdminLayout;
 
