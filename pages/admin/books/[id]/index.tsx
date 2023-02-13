@@ -2,7 +2,6 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
-import Flex from "../../../../components/Flex";
 import PageItem from "../../../../components/PageItem";
 import Value from "../../../../components/Value";
 import { langOptions } from "../../../../constants/options";
@@ -79,7 +78,7 @@ const AdminBookPage: NextPageWithLayout<
   }, [pages]);
 
   return (
-    <Flex direction="column" justify="center" align="center">
+    <>
       {book && (
         <Value label={books[locale].inputs.title.label}>{book.title}</Value>
       )}
@@ -99,7 +98,7 @@ const AdminBookPage: NextPageWithLayout<
       {sortedPages.map((page) => (
         <PageItem key={page.id} page={page} />
       ))}
-    </Flex>
+    </>
   );
 };
 

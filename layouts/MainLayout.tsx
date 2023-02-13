@@ -1,9 +1,15 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FC, PropsWithChildren } from "react";
+import styled from "styled-components";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { main } from "../locales/main";
+
+const MainContainer = styled.main`
+  padding: 24px 0;
+  flex: 1 1 auto;
+`;
 
 const MainLayout: FC<PropsWithChildren> = (props) => {
   const { children } = props;
@@ -17,7 +23,7 @@ const MainLayout: FC<PropsWithChildren> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main>{children}</main>
+      <MainContainer>{children}</MainContainer>
       <Footer />
     </>
   );

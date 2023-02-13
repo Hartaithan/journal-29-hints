@@ -2,11 +2,20 @@ import { Session } from "@supabase/supabase-js";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
+import styled from "styled-components";
 import Footer from "../components/Footer";
 import HeaderAdmin from "../components/HeaderAdmin";
 import AuthListener from "../components/AuthListener";
 import { supabase } from "../helpers/supabase";
 import { main } from "../locales/main";
+
+const AdminContainer = styled.main`
+  padding: 24px 0;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+`;
 
 const AdminLayout: FC<PropsWithChildren> = (props) => {
   const { children } = props;
@@ -32,7 +41,7 @@ const AdminLayout: FC<PropsWithChildren> = (props) => {
       </Head>
       <AuthListener accessToken={session?.access_token} />
       <HeaderAdmin />
-      <main>{children}</main>
+      <AdminContainer>{children}</AdminContainer>
       <Footer />
     </>
   );
