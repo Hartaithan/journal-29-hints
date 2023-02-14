@@ -1,6 +1,4 @@
-import { NextPage } from "next";
-
-const Home: NextPage = () => (
+const Home = () => (
   <main>
     <p>Hello World!</p>
   </main>
