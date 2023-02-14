@@ -1,6 +1,6 @@
 import AuthListener from "@/components/AuthListener";
 import SupabaseProvider from "@/components/SupabaseProvider";
-import { createServerClient } from "@/helpers/supabase";
+import { createServerClient } from "@/helpers/supabase-server";
 import "./globals.css";
 
 interface IRootLayoutProps {
