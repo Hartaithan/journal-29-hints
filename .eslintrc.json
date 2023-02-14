@@ -22,7 +22,6 @@
     "no-alert": "off",
     "import/prefer-default-export": "off",
     "import/no-named-default": "off",
-    "import/no-extraneous-dependencies": "off",
     "@typescript-eslint/naming-convention": "off"
   }
 }

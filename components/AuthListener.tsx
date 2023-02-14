@@ -2,31 +2,23 @@
 
 import { useRouter } from "next/navigation";
 import { FC, useEffect } from "react";
-import { useSupabase } from "./SupabaseProvider";
+import { supabase } from "../helpers/supabase";
 
 interface IAuthListenerProps {
-  serverAccessToken?: string;
+  accessToken?: string;
 }
 
 const AuthListener: FC<IAuthListenerProps> = (props) => {
-  const { serverAccessToken } = props;
-
-  const { supabase } = useSupabase();
+  const { accessToken } = props;
   const router = useRouter();
 
   useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.access_token !== serverAccessToken) {
+    supabase.auth.onAuthStateChange((_, session) => {
+      if (session?.access_token !== accessToken) {
         router.refresh();
       }
     });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [serverAccessToken, router, supabase]);
+  }, [accessToken]); // eslint-disable-line
 
   return null;
 };

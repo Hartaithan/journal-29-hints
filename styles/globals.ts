@@ -1,17 +1,19 @@
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
 * {
   padding: 0;
   margin: 0;
-  color: #ffffff;
+  color: white;
   box-sizing: border-box;
 }
 
 html,
 body,
-#__next,
-main {
+#__next {
   height: 100%;
   width: 100%;
-  background: #000000;
+  background: black;
 }
 
 #__next {
@@ -19,13 +21,10 @@ main {
   flex-direction: column;
 }
 
-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 button {
   border: none;
   outline: none;
 }
+`;
+
+export default GlobalStyle;

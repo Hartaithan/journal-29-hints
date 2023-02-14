@@ -1,6 +1,12 @@
 const nextConfig = {
-  experimental: {
-    appDir: true,
+  reactStrictMode: true,
+  swcMinify: true,
+  i18n: {
+    locales: ["ru", "en"],
+    defaultLocale: "ru",
+  },
+  compiler: {
+    styledComponents: true,
   },
 };
 
