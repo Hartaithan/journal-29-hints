@@ -1,13 +1,8 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-  i18n: {
-    locales: ["ru", "en"],
-    defaultLocale: "ru",
+  experimental: {
+    appDir: true,
   },
-  compiler: {
-    styledComponents: true,
-  },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
