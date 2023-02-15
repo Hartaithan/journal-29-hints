@@ -8,10 +8,11 @@ interface IAuthListenerProps {
   accessToken?: string;
 }
 
+const supabase = createBrowserSupabaseClient();
+
 const AuthListener: FC<IAuthListenerProps> = (props) => {
   const { accessToken } = props;
   const router = useRouter();
-  const supabase = createBrowserSupabaseClient();
 
   useEffect(() => {
     const {
