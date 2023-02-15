@@ -3,9 +3,10 @@ import styled from "styled-components";
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string | null;
+  fill?: boolean;
 }
 
-interface IStyledInputProps {
+interface IStyledInputProps extends IInputProps {
   isButton: boolean;
 }
 
@@ -16,7 +17,7 @@ const Container = styled.div`
 
 const StyledInput = styled.input<IStyledInputProps>`
   height: 30px;
-  width: 200px;
+  width: ${({ fill }) => (fill ? "100%" : "200px")};
   background: ${({ theme }) => theme.colors.white};
   outline: none;
   border: none;
@@ -32,12 +33,16 @@ const Label = styled.label`
 `;
 
 const Input: FC<IInputProps> = (props) => {
-  const { label = null, ...rest } = props;
+  const { label = null, fill = false, ...rest } = props;
   const buttonTypes: IInputProps["type"][] = ["button", "submit"];
   return (
     <Container>
       {label && <Label id={rest.id}>{label}</Label>}
-      <StyledInput {...rest} isButton={buttonTypes.includes(rest.type)} />
+      <StyledInput
+        {...rest}
+        isButton={buttonTypes.includes(rest.type)}
+        fill={fill}
+      />
     </Container>
   );
 };
