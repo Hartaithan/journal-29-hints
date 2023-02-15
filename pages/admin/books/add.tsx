@@ -1,3 +1,4 @@
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Flex from "../../../components/Flex";
@@ -5,7 +6,6 @@ import Form from "../../../components/Form";
 import Input from "../../../components/Input";
 import Select from "../../../components/Select";
 import { langOptions } from "../../../constants/options";
-import { supabase } from "../../../helpers/supabase";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { books } from "../../../locales/book";
 import { main } from "../../../locales/main";
@@ -22,6 +22,7 @@ interface IForm extends IBookPayload {
 const AdminBookAddPage: NextPageWithLayout = () => {
   const router = useRouter();
   const locale = router.locale || "ru";
+  const supabase = createBrowserSupabaseClient();
   const [form, setForm] = useState<IForm>({
     title: "",
     lang: "en",

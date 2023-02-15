@@ -3,10 +3,10 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import styled from "styled-components";
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import Footer from "../components/Footer";
 import HeaderAdmin from "../components/HeaderAdmin";
 import AuthListener from "../components/AuthListener";
-import { supabase } from "../helpers/supabase";
 import { main } from "../locales/main";
 
 const AdminContainer = styled.main`
@@ -21,6 +21,7 @@ const AdminLayout: FC<PropsWithChildren> = (props) => {
   const { children } = props;
   const router = useRouter();
   const locale = router.locale || "ru";
+  const supabase = createBrowserSupabaseClient();
   const [session, setSession] = useState<Session | null>(null);
 
   const getSession = async () => {
@@ -30,7 +31,7 @@ const AdminLayout: FC<PropsWithChildren> = (props) => {
 
   useEffect(() => {
     getSession();
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <>

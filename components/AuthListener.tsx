@@ -1,8 +1,8 @@
 "use client";
 
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { FC, useEffect } from "react";
-import { supabase } from "../helpers/supabase";
 
 interface IAuthListenerProps {
   accessToken?: string;
@@ -11,6 +11,7 @@ interface IAuthListenerProps {
 const AuthListener: FC<IAuthListenerProps> = (props) => {
   const { accessToken } = props;
   const router = useRouter();
+  const supabase = createBrowserSupabaseClient();
 
   useEffect(() => {
     const {
