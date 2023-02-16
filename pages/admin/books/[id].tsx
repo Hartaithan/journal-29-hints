@@ -9,6 +9,7 @@ import PageItem from "../../../components/PageItem";
 import Select from "../../../components/Select";
 import Value from "../../../components/Value";
 import { langOptions } from "../../../constants/options";
+import { getSession } from "../../../helpers/session";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { books } from "../../../locales/book";
 import { main } from "../../../locales/main";
@@ -27,10 +28,8 @@ export const getServerSideProps: GetServerSideProps<
   IAdminBookPageProps
 > = async (ctx) => {
   const id = ctx.params?.id;
+  const session = await getSession(ctx);
   const supabase = createServerSupabaseClient(ctx);
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
 
   const [{ data: book, error: bookError }, { data: pages, error: pagesError }] =
     await Promise.all([
@@ -48,8 +47,7 @@ export const getServerSideProps: GetServerSideProps<
 
   return {
     props: {
-      initialSession: session,
-      user: session?.user || null,
+      ...session,
       book: book || null,
       pages: pages || null,
     },

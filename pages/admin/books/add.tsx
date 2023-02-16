@@ -1,4 +1,5 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Flex from "../../../components/Flex";
@@ -6,6 +7,7 @@ import Form from "../../../components/Form";
 import Input from "../../../components/Input";
 import Select from "../../../components/Select";
 import { langOptions } from "../../../constants/options";
+import { getSession } from "../../../helpers/session";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { books } from "../../../locales/book";
 import { main } from "../../../locales/main";
@@ -18,6 +20,15 @@ import { IPagePayload } from "../../../models/PageMode";
 interface IForm extends IBookPayload {
   pages: number;
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session = await getSession(ctx);
+  return {
+    props: {
+      ...session,
+    },
+  };
+};
 
 const AdminBookAddPage: NextPageWithLayout = () => {
   const router = useRouter();

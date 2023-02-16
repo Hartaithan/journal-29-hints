@@ -1,20 +1,15 @@
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useUser } from "@supabase/auth-helpers-react";
 import { GetServerSideProps } from "next";
 import Flex from "../../components/Flex";
+import { getSession } from "../../helpers/session";
 import AdminLayout from "../../layouts/AdminLayout";
 import { NextPageWithLayout } from "../../models/AppModel";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const supabase = createServerSupabaseClient(ctx);
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
+  const session = await getSession(ctx);
   return {
     props: {
-      initialSession: session,
-      user: session?.user || null,
+      ...session,
     },
   };
 };

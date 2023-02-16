@@ -2,6 +2,7 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import BookItem from "../../../components/BookItem";
 import Flex from "../../../components/Flex";
+import { getSession } from "../../../helpers/session";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { IPageProps, NextPageWithLayout } from "../../../models/AppModel";
 import { IBook } from "../../../models/BookModel";
@@ -14,9 +15,7 @@ export const getServerSideProps: GetServerSideProps<
   IAdminBooksPageProps
 > = async (ctx) => {
   const supabase = createServerSupabaseClient(ctx);
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const session = await getSession(ctx);
   const { data: books, error } = await supabase.from("books").select("*");
 
   if (error) {
@@ -25,8 +24,7 @@ export const getServerSideProps: GetServerSideProps<
 
   return {
     props: {
-      initialSession: session,
-      user: session?.user || null,
+      ...session,
       books: books || [],
     },
   };
