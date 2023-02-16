@@ -15,7 +15,10 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const StyledInput = styled.input<IStyledInputProps>`
+const StyledInput = styled("input").withConfig({
+  shouldForwardProp: (prop, defaultValidatorFn) =>
+    !["fill"].includes(prop) && defaultValidatorFn(prop),
+})<IStyledInputProps>`
   height: 30px;
   width: ${({ fill }) => (fill ? "100%" : "200px")};
   background: ${({ theme }) => theme.colors.white};
