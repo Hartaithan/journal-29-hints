@@ -6,9 +6,9 @@ import Form from "../../components/Form";
 import Input from "../../components/Input";
 import AdminLayout from "../../layouts/AdminLayout";
 import { main } from "../../locales/main";
-import { NextPageWithLayout } from "../../models/AppModel";
+import { IAdminPageProps } from "../../models/AppModel";
 
-const AdminSignInPage: NextPageWithLayout = () => {
+const AdminSignInPage: IAdminPageProps = () => {
   const router = useRouter();
   const supabase = useSupabaseClient();
   const locale = router.locale || "ru";

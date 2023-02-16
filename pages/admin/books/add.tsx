@@ -11,7 +11,7 @@ import { getSession } from "../../../helpers/session";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { books } from "../../../locales/book";
 import { main } from "../../../locales/main";
-import { NextPageWithLayout } from "../../../models/AppModel";
+import { IAdminPageProps } from "../../../models/AppModel";
 import { IBook, IBookPayload } from "../../../models/BookModel";
 import { Locale } from "../../../models/LocaleModel";
 import { IOption } from "../../../models/OptionModel";
@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   };
 };
 
-const AdminBookAddPage: NextPageWithLayout = () => {
+const AdminBookAddPage: IAdminPageProps = () => {
   const router = useRouter();
   const locale = router.locale || "ru";
   const supabase = useSupabaseClient();

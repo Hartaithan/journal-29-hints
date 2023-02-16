@@ -4,7 +4,7 @@ import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { ThemeProvider } from "styled-components";
 import MainLayout from "../layouts/MainLayout";
-import { IAppProps, IPageProps } from "../models/AppModel";
+import { IAppProps } from "../models/AppModel";
 import GlobalStyle from "../styles/globals";
 import theme from "../styles/theme";
 
@@ -12,7 +12,7 @@ const lora = Lora({
   subsets: ["latin", "cyrillic"],
 });
 
-const App: React.FC<IAppProps<IPageProps>> = (props) => {
+const App: React.FC<IAppProps> = (props) => {
   const { Component, pageProps } = props;
   const Layout = Component.Layout || MainLayout;
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());

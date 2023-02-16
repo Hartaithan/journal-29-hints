@@ -10,14 +10,18 @@ export interface ILayoutProps {
   Layout?: FC<PropsWithChildren>;
 }
 
-export interface IAppProps<P> extends AppProps<P> {
-  Component: AppProps["Component"] & ILayoutProps;
-}
-
-export interface IPageProps {
+export interface SessionResponse {
   initialSession: NullableSession;
   user: NullableUser;
 }
 
-export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> &
+export interface IAppProps<P = {}> extends AppProps<P & SessionResponse> {
+  Component: AppProps["Component"] & ILayoutProps;
+}
+
+export type IPageProps<P = {}, IP = P> = NextPage<P, IP> & ILayoutProps;
+export type IAdminPageProps<P = {} & SessionResponse, IP = P> = NextPage<
+  P,
+  IP
+> &
   ILayoutProps;

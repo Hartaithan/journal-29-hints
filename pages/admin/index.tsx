@@ -3,9 +3,11 @@ import { GetServerSideProps } from "next";
 import Flex from "../../components/Flex";
 import { getSession } from "../../helpers/session";
 import AdminLayout from "../../layouts/AdminLayout";
-import { NextPageWithLayout } from "../../models/AppModel";
+import { IAdminPageProps, SessionResponse } from "../../models/AppModel";
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps<SessionResponse> = async (
+  ctx
+) => {
   const session = await getSession(ctx);
   return {
     props: {
@@ -14,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   };
 };
 
-const AdminPage: NextPageWithLayout = () => {
+const AdminPage: IAdminPageProps = () => {
   const user = useUser();
   return (
     <Flex direction="column" justify="center" align="center">

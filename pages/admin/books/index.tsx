@@ -1,13 +1,13 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { GetServerSideProps } from "next";
 import BookItem from "../../../components/BookItem";
 import Flex from "../../../components/Flex";
 import { getSession } from "../../../helpers/session";
 import AdminLayout from "../../../layouts/AdminLayout";
-import { IPageProps, NextPageWithLayout } from "../../../models/AppModel";
+import { IAdminPageProps } from "../../../models/AppModel";
 import { IBook } from "../../../models/BookModel";
 
-interface IAdminBooksPageProps extends IPageProps {
+interface IAdminBooksPageProps {
   books: IBook[];
 }
 
@@ -30,9 +30,7 @@ export const getServerSideProps: GetServerSideProps<
   };
 };
 
-const AdminBooksPage: NextPageWithLayout<
-  InferGetServerSidePropsType<typeof getServerSideProps>
-> = (props) => {
+const AdminBooksPage: IAdminPageProps<IAdminBooksPageProps> = (props) => {
   const { books } = props;
   return (
     <Flex direction="column" justify="center" align="center">

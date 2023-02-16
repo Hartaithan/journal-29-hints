@@ -1,6 +1,6 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 import Form from "../../../components/Form";
@@ -13,13 +13,13 @@ import { getSession } from "../../../helpers/session";
 import AdminLayout from "../../../layouts/AdminLayout";
 import { books } from "../../../locales/book";
 import { main } from "../../../locales/main";
-import { IPageProps, NextPageWithLayout } from "../../../models/AppModel";
+import { IAdminPageProps } from "../../../models/AppModel";
 import { IBook, IBookPayload } from "../../../models/BookModel";
 import { Locale } from "../../../models/LocaleModel";
 import { IOption } from "../../../models/OptionModel";
 import { IPage } from "../../../models/PageMode";
 
-interface IAdminBookPageProps extends IPageProps {
+interface IAdminBookPageProps {
   book: IBook | null;
   pages: IPage[] | null;
 }
@@ -54,9 +54,7 @@ export const getServerSideProps: GetServerSideProps<
   };
 };
 
-const AdminBookPage: NextPageWithLayout<
-  InferGetServerSidePropsType<typeof getServerSideProps>
-> = (props) => {
+const AdminBookPage: IAdminPageProps<IAdminBookPageProps> = (props) => {
   const { book, pages } = props;
   const router = useRouter();
   const locale = router.locale || "ru";

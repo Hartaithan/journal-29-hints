@@ -1,11 +1,6 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
-import { NullableSession, NullableUser } from "../models/AppModel";
-
-interface SessionResponse {
-  initialSession: NullableSession;
-  user: NullableUser;
-}
+import { SessionResponse } from "../models/AppModel";
 
 export const getSession = async (
   ctx: GetServerSidePropsContext

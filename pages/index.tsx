@@ -1,10 +1,10 @@
-import { NextPage } from "next";
 import { useRouter } from "next/router";
 import Title from "../components/Title";
 import { main } from "../locales/main";
 import Flex from "../components/Flex";
+import { IPageProps } from "../models/AppModel";
 
-const Home: NextPage = () => {
+const Home: IPageProps = () => {
   const router = useRouter();
   const locale = router.locale || "ru";
   return (
