@@ -1,4 +1,4 @@
-import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Flex from "../../../components/Flex";
@@ -22,7 +22,7 @@ interface IForm extends IBookPayload {
 const AdminBookAddPage: NextPageWithLayout = () => {
   const router = useRouter();
   const locale = router.locale || "ru";
-  const supabase = createBrowserSupabaseClient();
+  const supabase = useSupabaseClient();
   const [form, setForm] = useState<IForm>({
     title: "",
     lang: "en",

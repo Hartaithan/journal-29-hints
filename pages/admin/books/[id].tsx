@@ -1,7 +1,5 @@
-import {
-  createBrowserSupabaseClient,
-  createServerSupabaseClient,
-} from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
@@ -73,7 +71,7 @@ const AdminBookPage: NextPageWithLayout<
   const { book, pages } = props;
   const router = useRouter();
   const locale = router.locale || "ru";
-  const supabase = createBrowserSupabaseClient();
+  const supabase = useSupabaseClient();
   const [form, setForm] = useState<IBookPayload>({
     title: book?.title ?? "",
     lang: book?.lang ?? "en",

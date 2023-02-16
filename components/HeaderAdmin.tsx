@@ -1,5 +1,4 @@
-import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { useUser } from "@supabase/auth-helpers-react";
+import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { FC } from "react";
 import styled from "styled-components";
@@ -74,7 +73,7 @@ const HeaderAdmin: FC = () => {
   const router = useRouter();
   const user = useUser();
   const locale = router.locale || "ru";
-  const supabase = createBrowserSupabaseClient();
+  const supabase = useSupabaseClient();
 
   const handleSignOut = async () => {
     const { error } = await supabase.auth.signOut();

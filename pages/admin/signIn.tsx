@@ -1,7 +1,5 @@
-import {
-  createBrowserSupabaseClient,
-  createServerSupabaseClient,
-} from "@supabase/auth-helpers-nextjs";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -32,8 +30,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 const AdminSignInPage: NextPageWithLayout = () => {
   const router = useRouter();
+  const supabase = useSupabaseClient();
   const locale = router.locale || "ru";
-  const supabase = createBrowserSupabaseClient();
   const [form, setForm] = useState({
     email: "",
     password: "",
