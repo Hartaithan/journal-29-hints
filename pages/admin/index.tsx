@@ -1,4 +1,5 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useUser } from "@supabase/auth-helpers-react";
 import { GetServerSideProps } from "next";
 import Flex from "../../components/Flex";
 import AdminLayout from "../../layouts/AdminLayout";
@@ -10,28 +11,24 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/admin/signIn",
-        permanent: false,
-      },
-    };
-  }
-
   return {
     props: {
       initialSession: session,
-      user: session.user,
+      user: session?.user || null,
     },
   };
 };
 
-const AdminPage: NextPageWithLayout = () => (
-  <Flex direction="column" justify="center" align="center">
-    /admin
-  </Flex>
-);
+const AdminPage: NextPageWithLayout = () => {
+  const user = useUser();
+  return (
+    <Flex direction="column" justify="center" align="center">
+      <p>/admin</p>
+      <br />
+      <pre>{JSON.stringify(user, null, 2)}</pre>
+    </Flex>
+  );
+};
 
 AdminPage.Layout = AdminLayout;
 

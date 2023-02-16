@@ -1,6 +1,4 @@
-import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Flex from "../../components/Flex";
@@ -9,24 +7,6 @@ import Input from "../../components/Input";
 import AdminLayout from "../../layouts/AdminLayout";
 import { main } from "../../locales/main";
 import { NextPageWithLayout } from "../../models/AppModel";
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const supabaseClient = createServerSupabaseClient(ctx);
-  const {
-    data: { session },
-  } = await supabaseClient.auth.getSession();
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/admin",
-        permanent: false,
-      },
-    };
-  }
-
-  return { props: {} };
-};
 
 const AdminSignInPage: NextPageWithLayout = () => {
   const router = useRouter();

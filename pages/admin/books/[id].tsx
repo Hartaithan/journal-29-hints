@@ -32,15 +32,6 @@ export const getServerSideProps: GetServerSideProps<
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/admin/signIn",
-        permanent: false,
-      },
-    };
-  }
-
   const [{ data: book, error: bookError }, { data: pages, error: pagesError }] =
     await Promise.all([
       supabase.from("books").select("*").eq("id", id).single(),
@@ -58,7 +49,7 @@ export const getServerSideProps: GetServerSideProps<
   return {
     props: {
       initialSession: session,
-      user: session.user,
+      user: session?.user || null,
       book: book || null,
       pages: pages || null,
     },
@@ -73,8 +64,8 @@ const AdminBookPage: NextPageWithLayout<
   const locale = router.locale || "ru";
   const supabase = useSupabaseClient();
   const [form, setForm] = useState<IBookPayload>({
-    title: book?.title ?? "",
-    lang: book?.lang ?? "en",
+    title: book?.title || "",
+    lang: book?.lang || "en",
   });
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

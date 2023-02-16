@@ -19,15 +19,6 @@ export const getServerSideProps: GetServerSideProps<
   } = await supabase.auth.getSession();
   const { data: books, error } = await supabase.from("books").select("*");
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/admin/signIn",
-        permanent: false,
-      },
-    };
-  }
-
   if (error) {
     console.error("get books error", error);
   }
@@ -35,7 +26,7 @@ export const getServerSideProps: GetServerSideProps<
   return {
     props: {
       initialSession: session,
-      user: session.user,
+      user: session?.user || null,
       books: books || [],
     },
   };
