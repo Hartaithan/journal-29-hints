@@ -1,0 +1,37 @@
+---
+import { content } from "../../../data/content";
+import { locales } from "../../../data/locale";
+import Main from "../../../layouts/main.astro";
+
+export const getStaticPaths = () => {
+  const paths = [];
+  for (const locale of locales) {
+    for (const book of content.books) {
+      for (const page of book.pages) {
+        paths.push({
+          params: { locale, book: book.slug, page: page.slug },
+          props: { hints: page.hints },
+        });
+      }
+    }
+  }
+  return paths;
+};
+
+const { locale } = Astro.params;
+const { hints } = Astro.props;
+---
+
+<Main>
+  <pre>locale: {locale}</pre>
+  <div>
+    {
+      hints.map((hint) => (
+        <div>
+          <h3>{hint[locale].title}</h3>
+          <p>{hint[locale].content}</p>
+        </div>
+      ))
+    }
+  </div>
+</Main>

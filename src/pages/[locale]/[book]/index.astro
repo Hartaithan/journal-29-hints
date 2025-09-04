@@ -1,0 +1,28 @@
+---
+import { content } from "../../../data/content";
+import { locales } from "../../../data/locale";
+import Main from "../../../layouts/main.astro";
+
+export const getStaticPaths = () => {
+  const paths = [];
+  for (const locale of locales) {
+    for (const book of content.books) {
+      paths.push({
+        params: { locale, book: book.slug },
+        props: { pages: book.pages },
+      });
+    }
+  }
+  return paths;
+};
+
+const { locale, book } = Astro.params;
+const { pages } = Astro.props;
+---
+
+<Main>
+  <pre>locale: {locale}</pre>
+  <div>
+    {pages.map((page) => <a href={`${book}/${page.slug}`}>Page {page.slug}</a>)}
+  </div>
+</Main>
