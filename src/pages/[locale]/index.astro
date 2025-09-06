@@ -2,6 +2,7 @@
 import Main from "../../layouts/main.astro";
 import { content } from "../../data/content";
 import { locales } from "../../data/locale";
+import BookList from "../../components/book-list.astro";
 
 export const getStaticPaths = () => {
   return locales.map((locale) => {
@@ -14,8 +15,5 @@ const { books } = Astro.props;
 ---
 
 <Main>
-  <pre>locale: {locale}</pre>
-  <div>
-    {books.map((book) => <a href={`${book.slug}`}>{book.title[locale]}</a>)}
-  </div>
+  <BookList locale={locale} books={books} />
 </Main>

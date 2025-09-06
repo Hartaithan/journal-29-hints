@@ -1,0 +1,25 @@
+---
+import type { Book } from "../models/book";
+import type { Locale } from "../models/locale";
+import BookItem from "./book-item.astro";
+
+interface Props {
+  locale: Locale;
+  books: Book[];
+}
+
+const { locale, books } = Astro.props;
+---
+
+<div class="container">
+  {books.map((book) => <BookItem locale={locale} book={book} />)}
+</div>
+
+<style>
+  .container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 24px;
+  }
+</style>
