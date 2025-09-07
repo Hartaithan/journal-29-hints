@@ -10,7 +10,7 @@ interface Props {
 const { locale, book } = Astro.props;
 ---
 
-<a class="book" href={`${book.slug}`}>
+<a class="book" href={`${locale}/${book.slug}`}>
   <div class="content">
     <h3 class="title">{book.full_title[locale]}</h3>
     <p>Pages: {book.pages.length}</p>
