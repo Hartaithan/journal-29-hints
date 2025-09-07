@@ -1,0 +1,30 @@
+---
+import type { Locale } from "../models/locale";
+import type { Page } from "../models/page";
+import PageItem from "./page-item.astro";
+
+interface Props {
+  locale: Locale;
+  pages: Page[];
+  href: string;
+}
+
+const { locale, pages, href } = Astro.props;
+---
+
+<div class="container">
+  {
+    pages.map((page) => (
+      <PageItem locale={locale} page={page} href={`${href}/${page.slug}`} />
+    ))
+  }
+</div>
+
+<style>
+  .container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: 24px;
+  }
+</style>

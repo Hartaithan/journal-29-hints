@@ -1,0 +1,44 @@
+---
+import type { Locale } from "../models/locale";
+import type { Page } from "../models/page";
+
+interface Props {
+  locale: Locale;
+  page: Page;
+  href: string;
+}
+
+const { page, href } = Astro.props;
+---
+
+<a class="page" href={href}>
+  <h3 class="title">{page.slug}</h3>
+  <h4 class="description">page</h4>
+</a>
+
+<style>
+  .page {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    color: #ffffff;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid #ffffff;
+    text-decoration: none;
+  }
+
+  .title {
+    font-size: 28px;
+    font-weight: 800;
+  }
+
+  .description {
+    font-size: 12px;
+    font-weight: 400;
+  }
+</style>

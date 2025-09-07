@@ -25,6 +25,40 @@ export const content: Content = {
             },
           ],
         },
+        {
+          slug: 2,
+          hints: [
+            {
+              en: { title: "Hint 1", content: "Hint 1 content" },
+              ru: { title: "Подсказка 1", content: "Контент подсказки 1" },
+            },
+            {
+              en: { title: "Hint 2", content: "Hint 2 content" },
+              ru: { title: "Подсказка 2", content: "Контент подсказки 2" },
+            },
+            {
+              en: { title: "Hint 3", content: "Hint 3 content" },
+              ru: { title: "Подсказка 3", content: "Контент подсказки 3" },
+            },
+          ],
+        },
+        {
+          slug: 3,
+          hints: [
+            {
+              en: { title: "Hint 1", content: "Hint 1 content" },
+              ru: { title: "Подсказка 1", content: "Контент подсказки 1" },
+            },
+            {
+              en: { title: "Hint 2", content: "Hint 2 content" },
+              ru: { title: "Подсказка 2", content: "Контент подсказки 2" },
+            },
+            {
+              en: { title: "Hint 3", content: "Hint 3 content" },
+              ru: { title: "Подсказка 3", content: "Контент подсказки 3" },
+            },
+          ],
+        },
       ],
     },
     {
