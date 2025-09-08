@@ -1,0 +1,26 @@
+---
+import type { LocalizedHint } from "../models/hint";
+import type { Locale } from "../models/locale";
+
+interface Props {
+  locale: Locale;
+  hint: LocalizedHint;
+}
+
+const { locale, hint } = Astro.props;
+---
+
+<div class="hint container">
+  <h3 class="title">{hint[locale].title}</h3>
+  <p class="content">{hint[locale].content}</p>
+</div>
+
+<style>
+  .content {
+    filter: blur(6px);
+  }
+
+  .container.opened > .content {
+    filter: none;
+  }
+</style>
