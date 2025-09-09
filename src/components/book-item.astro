@@ -1,21 +1,22 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import type { Book } from "../models/book";
-import type { Locale } from "../models/locale";
+import { getLocale } from "../utils/locale";
 
 interface Props {
-  locale: Locale;
   book: Book;
 }
 
-const { locale, book } = Astro.props;
+const { book } = Astro.props;
+const locale = getLocale(Astro);
 ---
 
-<a class="book" href={`${locale}/${book.slug}`}>
+<a class="book" href={getRelativeLocaleUrl(locale, book.slug)}>
   <div class="content">
     <h3 class="title">{book.full_title[locale]}</h3>
     <p>Pages: {book.pages.length}</p>
   </div>
-  <img class="thumbnail" src={`${book.slug}.webp`} />
+  <img class="thumbnail" src={`/${book.slug}.webp`} />
 </a>
 
 <style>

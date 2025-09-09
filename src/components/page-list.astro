@@ -1,21 +1,25 @@
 ---
-import type { Locale } from "../models/locale";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import type { Page } from "../models/page";
 import PageItem from "./page-item.astro";
+import { getLocale } from "../utils/locale";
 
 interface Props {
-  locale: Locale;
+  book: string;
   pages: Page[];
-  href: string;
 }
 
-const { locale, pages, href } = Astro.props;
+const { book, pages } = Astro.props;
+const locale = getLocale(Astro);
 ---
 
 <div class="container">
   {
     pages.map((page) => (
-      <PageItem locale={locale} page={page} href={`${href}/${page.slug}`} />
+      <PageItem
+        page={page}
+        href={getRelativeLocaleUrl(locale, `${book}/${page.slug}`)}
+      />
     ))
   }
 </div>

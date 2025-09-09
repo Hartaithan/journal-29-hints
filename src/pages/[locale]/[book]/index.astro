@@ -17,10 +17,10 @@ export const getStaticPaths = () => {
   return paths;
 };
 
-const { locale, book } = Astro.params;
+const { book } = Astro.params;
 const { pages } = Astro.props;
 ---
 
 <Main>
-  <PageList locale={locale} pages={pages} href={`${book}`} />
+  <PageList pages={pages} book={book} />
 </Main>

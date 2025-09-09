@@ -1,13 +1,13 @@
 ---
 import type { LocalizedHint } from "../models/hint";
-import type { Locale } from "../models/locale";
+import { getLocale } from "../utils/locale";
 
 interface Props {
-  locale: Locale;
   hint: LocalizedHint;
 }
 
-const { locale, hint } = Astro.props;
+const { hint } = Astro.props;
+const locale = getLocale(Astro);
 ---
 
 <div class="hint container">

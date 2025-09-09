@@ -19,10 +19,9 @@ export const getStaticPaths = () => {
   return paths;
 };
 
-const { locale } = Astro.params;
 const { hints } = Astro.props;
 ---
 
 <Main>
-  <HintList locale={locale} hints={hints} />
+  <HintList hints={hints} />
 </Main>

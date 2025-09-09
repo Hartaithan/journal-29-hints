@@ -1,18 +1,16 @@
 ---
 import type { LocalizedHint } from "../models/hint";
-import type { Locale } from "../models/locale";
 import HintItem from "./hint-item.astro";
 
 interface Props {
-  locale: Locale;
   hints: LocalizedHint[];
 }
 
-const { locale, hints } = Astro.props;
+const { hints } = Astro.props;
 ---
 
 <div class="container">
-  {hints.map((hint) => <HintItem locale={locale} hint={hint} />)}
+  {hints.map((hint) => <HintItem hint={hint} />)}
 </div>
 
 <style>

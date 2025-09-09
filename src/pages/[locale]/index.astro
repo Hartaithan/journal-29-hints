@@ -10,10 +10,9 @@ export const getStaticPaths = () => {
   });
 };
 
-const { locale } = Astro.params;
 const { books } = Astro.props;
 ---
 
 <Main>
-  <BookList locale={locale} books={books} />
+  <BookList books={books} />
 </Main>
