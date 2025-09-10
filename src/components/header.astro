@@ -1,0 +1,38 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLocale } from "../utils/locale";
+import LocaleSwitch from "./locale-switch.astro";
+
+const locale = getLocale(Astro);
+---
+
+<header class="container">
+  <div class="content">
+    <a class="title" href={getRelativeLocaleUrl(locale)}>Journal 29 Hints</a>
+    <LocaleSwitch />
+  </div>
+</header>
+
+<style>
+  .container {
+    height: 48px;
+  }
+
+  .content {
+    height: 100%;
+    width: 100%;
+    max-width: var(--container-width);
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+
+  .title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+</style>

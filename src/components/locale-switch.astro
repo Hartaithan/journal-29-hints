@@ -1,0 +1,61 @@
+---
+import { localeLabels } from "../constants/locale";
+import { getLocale } from "../utils/locale";
+
+const locale = getLocale(Astro);
+---
+
+<div class="switcher">
+  {
+    Object.entries(localeLabels).map(([item, label]) => (
+      <button
+        class={`locale-switch ${item === locale && "active"}`}
+        data-locale={item}
+      >
+        {label}
+      </button>
+    ))
+  }
+</div>
+
+<style>
+  .switcher {
+    position: relative;
+  }
+
+  .locale-switch {
+    background: transparent;
+    color: #ffffff;
+  }
+
+  .active {
+    text-decoration: underline;
+  }
+</style>
+
+<script>
+  const changeLocale = (locale: string) => {
+    const url = new URL(window.location.href);
+    const segments = url.pathname.split("/").filter(Boolean);
+    segments[0] = locale;
+    url.pathname = "/" + segments.join("/");
+    window.location.href = url.toString();
+  };
+
+  const init = () => {
+    const locales = document.getElementsByClassName("locale-switch");
+    if (locales.length === 0) return;
+    for (const locale of locales) {
+      locale.addEventListener("click", (e) => {
+        const target = e.target as HTMLButtonElement;
+        const value = target.dataset.locale;
+        if (!value) return;
+        changeLocale(value);
+      });
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    init();
+  });
+</script>
