@@ -4,15 +4,17 @@ import { getLocale } from "../utils/locale";
 
 interface Props {
   hint: LocalizedHint;
+  index: number;
 }
 
-const { hint } = Astro.props;
+const { hint, index } = Astro.props;
 const locale = getLocale(Astro);
+const id = `hint-${index}`;
 ---
 
-<div class="hint container">
+<div id={id} class="hint container">
   <h3 class="title">{hint[locale].title}</h3>
-  <p class="content">{hint[locale].content}</p>
+  <p class="content">Hidden</p>
 </div>
 
 <style>
@@ -24,3 +26,27 @@ const locale = getLocale(Astro);
     filter: none;
   }
 </style>
+
+<script define:vars={{ id, content: hint[locale].content }}>
+  const init = () => {
+    const container = document.getElementById(id);
+    if (!container) return;
+
+    container.addEventListener("click", () => {
+      const { classList, children } = container;
+      const contentElement = children.length > 0 && children[1];
+      if (!contentElement) return;
+      if (classList.contains("opened")) {
+        contentElement.textContent = "Hidden";
+        classList.remove("opened");
+      } else {
+        contentElement.textContent = content;
+        classList.add("opened");
+      }
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    init();
+  });
+</script>
