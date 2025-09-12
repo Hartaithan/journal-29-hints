@@ -2,6 +2,7 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import type { Book } from "../models/book";
 import { getLocale } from "../utils/locale";
+import { translations } from "../constants/translations";
 
 interface Props {
   book: Book;
@@ -14,7 +15,7 @@ const locale = getLocale(Astro);
 <a class="book" href={getRelativeLocaleUrl(locale, book.slug)}>
   <div class="content">
     <h3 class="title">{book.full_title[locale]}</h3>
-    <p>Pages: {book.pages.length}</p>
+    <p>{translations[locale].pages}: {book.pages.length}</p>
   </div>
   <img class="thumbnail" src={`/${book.slug}.webp`} />
 </a>

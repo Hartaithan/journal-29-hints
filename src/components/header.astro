@@ -2,13 +2,16 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { getLocale } from "../utils/locale";
 import LocaleSwitch from "./locale-switch.astro";
+import { translations } from "../constants/translations";
 
 const locale = getLocale(Astro);
 ---
 
 <header class="container">
   <div class="content">
-    <a class="title" href={getRelativeLocaleUrl(locale)}>Journal 29 Hints</a>
+    <a class="title" href={getRelativeLocaleUrl(locale)}>
+      {translations[locale].title}
+    </a>
     <LocaleSwitch />
   </div>
 </header>

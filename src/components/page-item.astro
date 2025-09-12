@@ -1,5 +1,7 @@
 ---
+import { translations } from "../constants/translations";
 import type { Page } from "../models/page";
+import { getLocale } from "../utils/locale";
 
 interface Props {
   page: Page;
@@ -7,11 +9,12 @@ interface Props {
 }
 
 const { page, href } = Astro.props;
+const locale = getLocale(Astro);
 ---
 
 <a class="page" href={href}>
   <h3 class="title">{page.slug}</h3>
-  <h4 class="description">page</h4>
+  <h4 class="description">{translations[locale].page.toLowerCase()}</h4>
 </a>
 
 <style>
