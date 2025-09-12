@@ -9,7 +9,8 @@ const locale = getLocale(Astro);
   {
     Object.entries(localeLabels).map(([item, label]) => (
       <button
-        class={`locale-switch ${item === locale && "active"}`}
+        class="locale-switch"
+        class:list={{ active: item === locale }}
         data-locale={item}
       >
         {label}
@@ -55,7 +56,5 @@ const locale = getLocale(Astro);
     }
   };
 
-  document.addEventListener("DOMContentLoaded", () => {
-    init();
-  });
+  init();
 </script>
