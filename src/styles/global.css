@@ -44,10 +44,13 @@ body {
 }
 
 body {
-  font-family: "Lora", serif;
   font-optical-sizing: auto;
   background: #000000;
   color: #ffffff;
+}
+
+body * {
+  font-family: "Montserrat", sans-serif;
 }
 
 main {
