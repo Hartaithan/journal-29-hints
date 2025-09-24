@@ -6,17 +6,21 @@ const locale = getLocale(Astro);
 ---
 
 <div class="switcher">
-  {
-    Object.entries(localeLabels).map(([item, label]) => (
-      <button
-        class="locale-switch"
-        class:list={{ active: item === locale }}
-        data-locale={item}
-      >
-        {label}
-      </button>
-    ))
-  }
+  <button id="locale-trigger" class="trigger">
+    <span>{localeLabels[locale]}</span>
+  </button>
+  <div id="locale-dropdown" class="dropdown">
+    {
+      Object.entries(localeLabels).map(([item, label]) => {
+        const active = item === locale;
+        return (
+          <button class:list={["option", { active }]} data-locale={item}>
+            {label}
+          </button>
+        );
+      })
+    }
+  </div>
 </div>
 
 <style>
@@ -24,17 +28,64 @@ const locale = getLocale(Astro);
     position: relative;
   }
 
-  .locale-switch {
+  .trigger {
     background: transparent;
+    color: #ffffff;
+    font-size: 12px;
+  }
+
+  .dropdown {
+    --dropdown-radius: 12px;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    border-radius: var(--dropdown-radius);
+    background: #000000;
+    min-width: 140px;
+    transition: all 0.2s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    z-index: 100;
+  }
+
+  .dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 16px;
+    background: #000000;
     color: #ffffff;
   }
 
-  .active {
+  .option:first-child {
+    border-radius: var(--dropdown-radius) var(--dropdown-radius) 0 0;
+  }
+
+  .option:last-child {
+    border-radius: 0 0 var(--dropdown-radius) var(--dropdown-radius);
+  }
+
+  .option:hover {
+    background: #2e2e2e;
+  }
+
+  .option.active {
     text-decoration: underline;
   }
 </style>
 
 <script>
+  let trigger: HTMLElement | null = null;
+  let dropdown: HTMLElement | null = null;
+  let open: boolean = false;
+
   const changeLocale = (locale: string) => {
     const url = new URL(window.location.href);
     const segments = url.pathname.split("/").filter(Boolean);
@@ -43,17 +94,37 @@ const locale = getLocale(Astro);
     window.location.href = url.toString();
   };
 
-  const init = () => {
-    const locales = document.getElementsByClassName("locale-switch");
-    if (locales.length === 0) return;
-    for (const locale of locales) {
-      locale.addEventListener("click", (e) => {
-        const target = e.target as HTMLButtonElement;
-        const value = target.dataset.locale;
-        if (!value) return;
-        changeLocale(value);
-      });
+  const toggleDropdown = () => {
+    if (!trigger || !dropdown) return;
+    open = !open;
+    if (open) {
+      trigger.classList.add("open");
+      dropdown.classList.add("open");
+    } else {
+      trigger.classList.remove("open");
+      dropdown.classList.remove("open");
     }
+  };
+
+  const init = () => {
+    trigger = document.getElementById("locale-trigger");
+    dropdown = document.getElementById("locale-dropdown");
+
+    if (!trigger || !dropdown) return;
+
+    trigger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDropdown();
+    });
+
+    dropdown.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+      const option = target.closest<HTMLElement>(".option");
+      if (!option) return;
+      const locale = option.dataset.locale;
+      if (!locale) return;
+      changeLocale(locale);
+    });
   };
 
   init();
